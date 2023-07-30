@@ -12,24 +12,18 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-    -- Theme
-    {
-        "rebelot/kanagawa.nvim",
-        lazy = false,
-        priority = 1000,
-    },
+    -- Main theme
+    { "rebelot/kanagawa.nvim", lazy = false, priority = 1000 },
     -- Blazingly fast file navigation
-    {
-        "ThePrimeagen/harpoon",
-        dependencies = "nvim-lua/plenary.nvim",
-    },
+    { "ThePrimeagen/harpoon", dependencies = "nvim-lua/plenary.nvim" },
     -- Fuzzy finder
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = "nvim-lua/plenary.nvim",
-    },
+    { "nvim-telescope/telescope.nvim" },
     -- Finder algorithm
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    -- Icons
+    { "nvim-tree/nvim-web-devicons" },
+     -- Status line
+    { "nvim-lualine/lualine.nvim" },
 
 }
 local opts = {}
