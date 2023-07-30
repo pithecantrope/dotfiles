@@ -30,8 +30,3 @@ vim.keymap.set("n", "<leader>yf", [[gg"+yG]])
 vim.keymap.set("n", "<leader>df", [[gg"_dG]])
 
 vim.keymap.set("n", "<leader>q", vim.cmd.Ex)
-
-vim.keymap.set("n", "<leader>o", function()
-    vim.cmd("w") vim.cmd("so")
-end)
-

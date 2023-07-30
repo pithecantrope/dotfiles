@@ -12,10 +12,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+    -- Theme
     {
         "rebelot/kanagawa.nvim",
         lazy = false,
         priority = 1000,
+    },
+    -- Blazingly fast file navigation
+    {
+        "ThePrimeagen/harpoon",
+        dependencies = "nvim-lua/plenary.nvim",
     },
 }
 local opts = {}
