@@ -21,12 +21,26 @@ local plugins = {
     { "nvim-lua/plenary.nvim", lazy = true, },
     -- Blazingly fast file navigation
     {
-        "ThePrimeagen/harpoon", lazy = false,
+        "ThePrimeagen/harpoon",
+        keys = {
+            { "<C-e>", desc = "Add file to menu" },
+            { "<C-m>", desc = "Toggle menu" },
+            { "<C-t>", desc = "Go to 1st file" },
+            { "<C-g>", desc = "Go to 2nd file" },
+            { "<C-h>", desc = "Go to 3rd file" },
+            { "<C-y>", desc = "Go to 4th file" },
+        },
         config = function() require("core.config.harpoon") end,
     },
     -- Fuzzy finder
     {
-        "nvim-telescope/telescope.nvim", lazy = false,
+        "nvim-telescope/telescope.nvim",
+        keys = {
+            { "<leader>ff", desc = "Find files by name" },
+            { "<leader>fg", desc = "Find files by content" },
+            { "<leader>fc", desc = "Find command in history" },
+            { "<leader>fh", desc = "Find nvim help" },
+        },
         dependencies = {
             "nvim-telescope/telescope-fzf-native.nvim", build = "make",
         },
