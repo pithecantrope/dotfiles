@@ -11,11 +11,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local plugins = {
+require("lazy").setup({
     -- Theme
     {
         "rebelot/kanagawa.nvim", lazy = false, priority = 1000,
-        config = function() require("core.config.colorscheme") end,
+        opts = {},
+        config = function() vim.cmd("colorscheme kanagawa-wave") end,
     },
     -- Lua library
     { "nvim-lua/plenary.nvim", lazy = true, },
@@ -30,7 +31,16 @@ local plugins = {
             { "<C-h>", desc = "Go to 3rd file" },
             { "<C-y>", desc = "Go to 4th file" },
         },
-        config = function() require("core.config.harpoon") end,
+        config = function()
+            local mark = require("harpoon.mark")
+            local ui = require("harpoon.ui")
+            vim.keymap.set("n", "<C-e>", mark.add_file)
+            vim.keymap.set("n", "<C-m>", ui.toggle_quick_menu)
+            vim.keymap.set("n", "<C-t>", function() ui.nav_file(1) end)
+            vim.keymap.set("n", "<C-g>", function() ui.nav_file(2) end)
+            vim.keymap.set("n", "<C-h>", function() ui.nav_file(3) end)
+            vim.keymap.set("n", "<C-y>", function() ui.nav_file(4) end)
+        end,
     },
     -- Fuzzy finder
     {
@@ -44,7 +54,14 @@ local plugins = {
         dependencies = {
             "nvim-telescope/telescope-fzf-native.nvim", build = "make",
         },
-        config = function() require("core.config.telescope") end,
+        config = function()
+            local builtin = require("telescope.builtin")
+            vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+            vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+            vim.keymap.set("n", "<leader>fc", builtin.command_history, {})
+            vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+            require("telescope").load_extension("fzf")
+        end,
     },
     -- Icons
     { "nvim-tree/nvim-web-devicons", lazy = true, },
@@ -58,7 +75,4 @@ local plugins = {
         event = "InsertEnter",
         opts = { map_cr = true, },
     },
-}
-local opts = {}
-
-require("lazy").setup(plugins, opts)
+})
