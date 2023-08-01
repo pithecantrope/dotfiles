@@ -50,8 +50,13 @@ local plugins = {
     { "nvim-tree/nvim-web-devicons", lazy = true, },
     -- Status line
     {
-        "nvim-lualine/lualine.nvim", event = "VeryLazy",
-        config = function() require("core.config.lualine") end,
+        "nvim-lualine/lualine.nvim", event = "VeryLazy", opts = {},
+    },
+    -- Auto pairs
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        opts = { map_cr = true, },
     },
 }
 local opts = {}
