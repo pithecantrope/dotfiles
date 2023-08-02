@@ -75,7 +75,7 @@ require("lazy").setup({
         event = "InsertEnter",
         opts = { map_cr = true, },
     },
-    -- Almighty syntax, smart selection and
+    -- Almighty syntax, smart selection, context and
     -- new text objects (class, function, call, parameter)
     {
         "nvim-treesitter/nvim-treesitter", build = ":TSUpdate",
@@ -86,7 +86,10 @@ require("lazy").setup({
             { "<leader>a", desc = "Swap argument forward" },
             { "<leader>A", desc = "Swap argument back" },
         },
-        dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            { "nvim-treesitter/nvim-treesitter-context", opts = {}, },
+        },
         opts = {
             auto_install = false,
             highlight = {
@@ -139,4 +142,5 @@ require("lazy").setup({
             require("nvim-treesitter.configs").setup(opts)
         end,
     },
+
 })
