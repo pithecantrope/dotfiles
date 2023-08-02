@@ -70,11 +70,7 @@ require("lazy").setup({
         "nvim-lualine/lualine.nvim", event = "VeryLazy", opts = {},
     },
     -- Auto pairs
-    {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        opts = { map_cr = true, },
-    },
+    { "windwp/nvim-autopairs", event = "InsertEnter", opts = {}, },
     -- Almighty syntax, smart selection, context and
     -- new text objects (class, function, call, parameter)
     {
@@ -98,8 +94,7 @@ require("lazy").setup({
             indent = { enable = true },
             ensure_installed = {
                 "bash", "json", "yaml", "query",
-                "vim", "vimdoc",
-                "lua", "luadoc", "luap",
+                "vim", "vimdoc", "lua", "luadoc", "luap",
                 "markdown", "markdown_inline",
                 "python", "regex",
                 "c", "cpp",
@@ -183,28 +178,6 @@ require("lazy").setup({
             lspconfig.clangd.setup { capabilities = capabilities, }
         end,
     },
-    -- Snippets
-    {
-        "L3MON4D3/LuaSnip",
-        build = "make install_jsregexp",
-        dependencies = {
-            "rafamadriz/friendly-snippets",
-            config = function()
-                require("luasnip.loaders.from_vscode").lazy_load()
-            end,
-        },
-        keys = {
-            {
-                "<tab>",
-                function()
-                    return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-                end,
-                expr = true, silent = true, mode = "i",
-            },
-            { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-            { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-        },
-    },
     -- Powerful completion
     {
         "hrsh7th/nvim-cmp",
@@ -254,4 +227,24 @@ require("lazy").setup({
             }
         end,
     },
+    -- Snippets
+    {
+        "L3MON4D3/LuaSnip", lazy = true, build = "make install_jsregexp",
+        dependencies = {
+            "rafamadriz/friendly-snippets",
+            config = function()
+                require("luasnip.loaders.from_vscode").lazy_load()
+            end,
+        },
+        config = function()
+            local ls = require("luasnip")
+            vim.keymap.set({"i"}, "<C-l>",
+                function() ls.expand() end, {silent = true})
+            vim.keymap.set({"i", "s"}, "<C-j>",
+                function() ls.jump( 1) end, {silent = true})
+            vim.keymap.set({"i", "s"}, "<C-k>",
+                function() ls.jump(-1) end, {silent = true})
+        end
+    },
 })
+
