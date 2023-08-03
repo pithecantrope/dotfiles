@@ -14,9 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- Theme
     {
-        "rebelot/kanagawa.nvim", lazy = false, priority = 1000,
-        opts = {},
-        config = function() vim.cmd("colorscheme kanagawa-wave") end,
+        "rebelot/kanagawa.nvim", lazy = false, priority = 1000, opts = {},
+        config = function() require("kanagawa").load("wave") end
     },
     -- Lua library
     { "nvim-lua/plenary.nvim", lazy = true, },
@@ -139,6 +138,7 @@ require("lazy").setup({
             require("nvim-treesitter.configs").setup(opts)
         end,
     },
+    -- 
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -246,5 +246,15 @@ require("lazy").setup({
                 function() ls.jump(-1) end, {silent = true})
         end
     },
+    -- Commenting
+    {
+        'numToStr/Comment.nvim', opts = {},
+        keys = {
+            { "gcc", desc = "Line-comment toggle" },
+            { "gbc", desc = "Block-comment toggle" },
+            { "gcO", desc = "Add comment on the line above" },
+            { "gco", desc = "Add comment on the line below" },
+            { "gcA", desc = "Add comment at the end of line" },
+        },
+    },
 })
-
