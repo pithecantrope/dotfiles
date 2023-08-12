@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- Theme
     {
-        "rebelot/kanagawa.nvim", lazy = false, priority = 1000, opts = {},
+        "rebelot/kanagawa.nvim", lazy = false, priority = 1000,
         config = function() require("kanagawa").load("wave") end
     },
     -- Lua library
@@ -138,7 +138,7 @@ require("lazy").setup({
             require("nvim-treesitter.configs").setup(opts)
         end,
     },
-    -- 
+    -- Language Server Protocol support
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -154,9 +154,6 @@ require("lazy").setup({
             },
             { "folke/neodev.nvim", opts = {} },
             "hrsh7th/cmp-nvim-lsp",
-        },
-        opts = {
-            -- !
         },
         config = function()
             local lspconfig = require('lspconfig')
@@ -238,12 +235,9 @@ require("lazy").setup({
         },
         config = function()
             local ls = require("luasnip")
-            vim.keymap.set({"i"}, "<C-l>",
-                function() ls.expand() end, {silent = true})
-            vim.keymap.set({"i", "s"}, "<C-j>",
-                function() ls.jump( 1) end, {silent = true})
-            vim.keymap.set({"i", "s"}, "<C-k>",
-                function() ls.jump(-1) end, {silent = true})
+            vim.keymap.set({"i"}, "<C-l>", function() ls.expand() end, {silent = true})
+            vim.keymap.set({"i", "s"}, "<C-j>", function() ls.jump( 1) end, {silent = true})
+            vim.keymap.set({"i", "s"}, "<C-k>", function() ls.jump(-1) end, {silent = true})
         end
     },
     -- Commenting
@@ -256,5 +250,16 @@ require("lazy").setup({
             { "gco", desc = "Add comment on the line below" },
             { "gcA", desc = "Add comment at the end of line" },
         },
+    },
+    -- Better comments
+    {
+        "folke/todo-comments.nvim", event = { "BufReadPost", "BufNewFile" },
+        opts = {},
+        config = function(_, opts)
+            local todo = require("todo-comments")
+            todo.setup(opts)
+            vim.keymap.set("n", "]t", function() todo.jump_next() end, { desc = "Next todo comment" })
+            vim.keymap.set("n", "[t", function() todo.jump_prev() end, { desc = "Previous todo comment" })
+        end
     },
 })
