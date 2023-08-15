@@ -14,11 +14,13 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- Theme
     {
-        "rebelot/kanagawa.nvim", lazy = false, priority = 1000,
+        "rebelot/kanagawa.nvim",
+        lazy = false,
+        priority = 1000,
         config = function() require("kanagawa").load("wave") end
     },
     -- Lua library
-    { "nvim-lua/plenary.nvim", lazy = true, },
+    { "nvim-lua/plenary.nvim",       lazy = true, },
     -- Blazingly fast file navigation
     {
         "ThePrimeagen/harpoon",
@@ -73,11 +75,13 @@ require("lazy").setup({
     -- Almighty syntax, smart selection, context and
     -- new text objects (class, function, call, parameter)
     {
-        "nvim-treesitter/nvim-treesitter", build = ":TSUpdate",
-        event = { "BufReadPost", "BufNewFile" }, cmd = { "TSUpdateSync" },
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        event = { "BufReadPost", "BufNewFile" },
+        cmd = { "TSUpdateSync" },
         keys = {
             { "<C-space>", desc = "Increment selection" },
-            { "<bs>", mode = "x", desc = "Decrement selection" },
+            { "<bs>",      mode = "x",                    desc = "Decrement selection" },
             { "<leader>a", desc = "Swap argument forward" },
             { "<leader>A", desc = "Swap argument back" },
         },
@@ -152,13 +156,13 @@ require("lazy").setup({
                     },
                 },
             },
-            { "folke/neodev.nvim", opts = {} },
+            { "folke/neodev.nvim",       opts = {} },
             "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
-            local lspconfig = require('lspconfig')
+            local lsp = require('lspconfig')
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            lspconfig.lua_ls.setup {
+            lsp.lua_ls.setup {
                 capabilities = capabilities,
                 settings = {
                     Lua = {
@@ -171,8 +175,42 @@ require("lazy").setup({
                     },
                 },
             }
-            lspconfig.pyright.setup { capabilities = capabilities, }
-            lspconfig.clangd.setup { capabilities = capabilities, }
+            -- HACK: setup pyright and clangd lsp
+            lsp.pyright.setup { capabilities = capabilities, }
+            lsp.clangd.setup { capabilities = capabilities, }
+
+            vim.keymap.set('n', '<leader>M', vim.diagnostic.open_float,
+                { desc = "Show more diagnostic info in a floating window" })
+            vim.keymap.set('n', '<leader>ld', vim.diagnostic.setloclist,
+                { desc = "Open diagnostics in location list" })
+            vim.api.nvim_create_autocmd('LspAttach', {
+                group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+                callback = function(ev)
+                    vim.keymap.set('n', '<leader>R', vim.lsp.buf.rename, { buffer = ev.buf,
+                        desc = "Rename all references to the word" })
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = ev.buf,
+                        desc = "Display hover information about the word" })
+                    vim.keymap.set('n', '<leader>K', vim.lsp.buf.signature_help, { buffer = ev.buf,
+                        desc = "Display signature information about the word" })
+                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = ev.buf,
+                        desc = "Jump to the declaration of the word" })
+                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf,
+                        desc = "Jump to the definition of the word" })
+                    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, { buffer = ev.buf,
+                        desc = "Jump to the definition of the type of the word" })
+                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = ev.buf,
+                        desc = "List implementations for the word in the quickfix window" })
+                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = ev.buf,
+                        desc = "List references to the word in the quickfix window" })
+                    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = ev.buf,
+                        desc = "Add the folder to the workspace folders" })
+                    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf,
+                        desc = "Remove the folder from the workspace folders" })
+                    vim.keymap.set('n', '<leader>wl', function()
+                        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+                    end, { buffer = ev.buf, desc = "Print workspace folders" })
+                end,
+            })
         end,
     },
     -- Powerful completion
@@ -226,7 +264,9 @@ require("lazy").setup({
     },
     -- Snippets
     {
-        "L3MON4D3/LuaSnip", lazy = true, build = "make install_jsregexp",
+        "L3MON4D3/LuaSnip",
+        lazy = true,
+        build = "make install_jsregexp",
         dependencies = {
             "rafamadriz/friendly-snippets",
             config = function()
@@ -235,14 +275,16 @@ require("lazy").setup({
         },
         config = function()
             local ls = require("luasnip")
-            vim.keymap.set({"i"}, "<C-l>", function() ls.expand() end, {silent = true})
-            vim.keymap.set({"i", "s"}, "<C-j>", function() ls.jump( 1) end, {silent = true})
-            vim.keymap.set({"i", "s"}, "<C-k>", function() ls.jump(-1) end, {silent = true})
+            vim.keymap.set({ "i" }, "<C-l>", function() ls.expand() end, { silent = true })
+            vim.keymap.set({ "i", "s" }, "<C-j>", function() ls.jump(1) end, { silent = true })
+            vim.keymap.set({ "i", "s" }, "<C-k>", function() ls.jump(-1) end, { silent = true })
         end
     },
+    -- PERF: fully optimized
     -- Commenting
     {
-        'numToStr/Comment.nvim', opts = {},
+        'numToStr/Comment.nvim',
+        opts = {},
         keys = {
             { "gcc", desc = "Line-comment toggle" },
             { "gbc", desc = "Block-comment toggle" },
@@ -251,6 +293,7 @@ require("lazy").setup({
             { "gcA", desc = "Add comment at the end of line" },
         },
     },
+    -- PERF: fully optimized
     -- Better comments
     {
         "folke/todo-comments.nvim",
@@ -259,7 +302,7 @@ require("lazy").setup({
         config = function(_, opts)
             local todo = require("todo-comments")
             todo.setup(opts)
-            vim.keymap.set("n", "<leader>lt", "<cmd>TodoLocList<CR>", { desc = "Open all todos in location list" })
+            vim.keymap.set("n", "<leader>lt", "<cmd>TodoLocList<CR>", { desc = "Open todos in location list" })
         end
     },
 })
