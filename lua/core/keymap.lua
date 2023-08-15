@@ -29,4 +29,10 @@ vim.keymap.set({"n", "v"}, "<leader>P", [["+P]])
 vim.keymap.set("n", "<leader>yf", [[gg"+yG]])
 vim.keymap.set("n", "<leader>df", [[gg"_dG]])
 
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
+
+vim.keymap.set("n", "<C-l>", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<C-;>", "<cmd>lprev<CR>zz")
+
 vim.keymap.set("n", "<leader>q", vim.cmd.Ex)
