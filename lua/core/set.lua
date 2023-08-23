@@ -1,7 +1,7 @@
 vim.opt.mouse = ""
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "88"
 vim.opt.scrolloff = 8
 vim.opt.wrap = false
 

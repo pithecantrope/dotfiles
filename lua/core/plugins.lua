@@ -51,6 +51,7 @@ require("lazy").setup({
             { "<leader>fg", desc = "Find files by content" },
             { "<leader>fc", desc = "Find command in history" },
             { "<leader>fh", desc = "Find nvim help" },
+            { "<leader>fk", desc = "Find normal mode keymappings" },
         },
         dependencies = {
             "nvim-telescope/telescope-fzf-native.nvim", build = "make",
@@ -61,6 +62,7 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
             vim.keymap.set("n", "<leader>fc", builtin.command_history, {})
             vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+            vim.keymap.set("n", "<leader>fk", builtin.keymaps, {})
             require("telescope").load_extension("fzf")
         end,
     },
@@ -176,6 +178,7 @@ require("lazy").setup({
                 },
             }
             -- HACK: setup pyright and clangd lsp
+            -- WARN: CHECK RUFF FOR PYTHON
             lsp.pyright.setup { capabilities = capabilities, }
             lsp.clangd.setup { capabilities = capabilities, }
 
@@ -186,29 +189,29 @@ require("lazy").setup({
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('UserLspConfig', {}),
                 callback = function(ev)
-                    vim.keymap.set('n', '<leader>R', vim.lsp.buf.rename, { buffer = ev.buf,
-                        desc = "Rename all references to the word" })
-                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = ev.buf,
-                        desc = "Display hover information about the word" })
-                    vim.keymap.set('n', '<leader>K', vim.lsp.buf.signature_help, { buffer = ev.buf,
-                        desc = "Display signature information about the word" })
-                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = ev.buf,
-                        desc = "Jump to the declaration of the word" })
-                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf,
-                        desc = "Jump to the definition of the word" })
-                    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, { buffer = ev.buf,
-                        desc = "Jump to the definition of the type of the word" })
-                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = ev.buf,
-                        desc = "List implementations for the word in the quickfix window" })
-                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = ev.buf,
-                        desc = "List references to the word in the quickfix window" })
-                    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = ev.buf,
-                        desc = "Add the folder to the workspace folders" })
-                    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf,
-                        desc = "Remove the folder from the workspace folders" })
+                    vim.keymap.set('n', '<leader>R', vim.lsp.buf.rename,
+                        { buffer = ev.buf, noremap = true, desc = "Rename all references to the word" })
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover,
+                        { buffer = ev.buf, noremap = true, desc = "Display hover information about the word" })
+                    vim.keymap.set('n', '<leader>K', vim.lsp.buf.signature_help,
+                        { buffer = ev.buf, noremap = true, desc = "Display signature information about the word" })
+                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,
+                        { buffer = ev.buf, noremap = true, desc = "Jump to the declaration of the word" })
+                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition,
+                        { buffer = ev.buf, noremap = true, desc = "Jump to the definition of the word" })
+                    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition,
+                        { buffer = ev.buf, noremap = true, desc = "Jump to the definition of the type of the word" })
+                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation,
+                        { buffer = ev.buf, noremap = true, desc = "List implementations for the word in the quickfix window" })
+                    vim.keymap.set('n', 'gr', vim.lsp.buf.references,
+                        { buffer = ev.buf, noremap = true, desc = "List references to the word in the quickfix window" })
+                    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder,
+                        { buffer = ev.buf, noremap = true, desc = "Add the folder to the workspace folders" })
+                    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder,
+                        { buffer = ev.buf, noremap = true, desc = "Remove the folder from the workspace folders" })
                     vim.keymap.set('n', '<leader>wl', function()
                         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                    end, { buffer = ev.buf, desc = "Print workspace folders" })
+                    end, { buffer = ev.buf, noremap = true, desc = "Print workspace folders" })
                 end,
             })
         end,
@@ -302,7 +305,20 @@ require("lazy").setup({
         config = function(_, opts)
             local todo = require("todo-comments")
             todo.setup(opts)
-            vim.keymap.set("n", "<leader>lt", "<cmd>TodoLocList<CR>", { desc = "Open todos in location list" })
+            vim.keymap.set("n", "<leader>lt", "<cmd>TodoLocList<CR>",
+                { desc = "Open todos in location list" })
         end
+    },
+    -- PERF: fully optimized
+    -- Lazygit integration
+    {
+        "kdheepak/lazygit.nvim",
+        keys = {
+            { "gl", "<cmd>LazyGit<CR>", desc = "Open lazygit" },
+        },
+    },
+    -- Format runner
+    {
+        'mhartington/formatter.nvim',
     },
 })
