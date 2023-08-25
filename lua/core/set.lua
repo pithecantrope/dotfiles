@@ -12,7 +12,7 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 
 vim.opt.list = true
-vim.opt.listchars:append "eol:↴"
+vim.opt.listchars:append("eol:↴")
 
 vim.opt.swapfile = false
 vim.opt.fileformat = "unix"
@@ -24,3 +24,6 @@ vim.opt.incsearch = true
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 vim.opt.updatetime = 50
+
+vim.wo.foldtext =
+    [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'. trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
