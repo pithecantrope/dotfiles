@@ -99,17 +99,12 @@ require("lazy").setup({
     { "nvim-lualine/lualine.nvim", event = "VeryLazy", opts = {} },
     -- Auto pairs
     { "windwp/nvim-autopairs", lazy = true, opts = {} },
-    -- Almighty syntax, smart selection, context and
-    -- new text objects (class, function, call, parameter)
+    -- Almighty syntax, smart selection and new text objects
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         event = { "BufReadPost", "BufNewFile" },
-        cmd = { "TSUpdateSync" },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            { "nvim-treesitter/nvim-treesitter-context", opts = {} },
-        },
+        dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
         opts = {
             auto_install = false,
             highlight = {
@@ -381,7 +376,6 @@ require("lazy").setup({
     -- Commenting
     {
         "numToStr/Comment.nvim",
-        opts = {},
         keys = {
             { "gc", mode = { "n", "x" }, desc = "Line-comment toggle" },
             { "gb", mode = { "n", "x" }, desc = "Block-comment toggle" },
@@ -391,6 +385,7 @@ require("lazy").setup({
             { "gco", desc = "Add comment on the line below" },
             { "gcA", desc = "Add comment at the end of line" },
         },
+        opts = {},
     },
     -- Better comments
     {
@@ -426,6 +421,7 @@ require("lazy").setup({
                 filetype = {
                     lua = { require("formatter.filetypes.lua").stylua },
                     python = { require("formatter.filetypes.python").black },
+                    c = { require("formatter.defaults.clangformat") },
                 },
             }
         end,
