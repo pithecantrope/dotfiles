@@ -289,6 +289,12 @@ require("lazy").setup({
                     })
                 end,
             })
+
+            local hl
+            for type, icon in pairs(require("core.icons").diagnostics) do
+                hl = "DiagnosticSign" .. type
+                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+            end
         end,
     },
     -- Powerful completion
