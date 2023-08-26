@@ -431,4 +431,14 @@ require("lazy").setup({
             })
         end,
     },
+    -- Annotation generator
+    {
+        "danymat/neogen",
+        keys = {
+            { "ga", "<cmd>Neogen<CR>", desc = "Generate annotation" },
+        },
+        opts = {
+            snippet_engine = "luasnip",
+        },
+    },
 })
