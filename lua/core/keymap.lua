@@ -27,6 +27,3 @@ vim.keymap.set("n", "<C-l>", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<C-;>", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>q", vim.cmd.Ex)
--- In /home/paul/.local/state/nvim/view
-vim.keymap.set("n", "<leader>vm", vim.cmd.mkview)
-vim.keymap.set("n", "<leader>vl", vim.cmd.loadview)

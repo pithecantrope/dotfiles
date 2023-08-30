@@ -128,6 +128,7 @@ require("lazy").setup({
                 "regex",
                 "c",
                 "cpp",
+                "make",
             },
             incremental_selection = {
                 enable = true,
@@ -227,6 +228,12 @@ require("lazy").setup({
                         "<leader>R",
                         vim.lsp.buf.rename,
                         { buffer = ev.buf, desc = "Rename all references to the word" }
+                    )
+                    vim.keymap.set(
+                        { "n", "v" },
+                        "<leader>C",
+                        vim.lsp.buf.code_action,
+                        { buffer = ev.buf, desc = "Pick a code action" }
                     )
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, {
                         buffer = ev.buf,
