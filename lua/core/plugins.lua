@@ -127,8 +127,9 @@ require("lazy").setup({
                 "python",
                 "regex",
                 "c",
-                "cpp",
                 "make",
+                "doxygen",
+                "cpp",
             },
             incremental_selection = {
                 enable = true,
@@ -206,7 +207,10 @@ require("lazy").setup({
                 },
             })
             lsp.pyright.setup({ capabilities = capabilities })
-            lsp.clangd.setup({ capabilities = capabilities })
+            lsp.clangd.setup({
+                capabilities = capabilities,
+                cmd = { "clangd", "--header-insertion=never" },
+            })
 
             vim.keymap.set(
                 "n",
@@ -230,7 +234,7 @@ require("lazy").setup({
                         { buffer = ev.buf, desc = "Rename all references to the word" }
                     )
                     vim.keymap.set(
-                        { "n", "v" },
+                        "n",
                         "<leader>C",
                         vim.lsp.buf.code_action,
                         { buffer = ev.buf, desc = "Pick a code action" }
