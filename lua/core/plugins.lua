@@ -117,6 +117,7 @@ require("lazy").setup({
                 "json",
                 "yaml",
                 "query",
+                "sql",
                 "vim",
                 "vimdoc",
                 "lua",
@@ -398,29 +399,6 @@ require("lazy").setup({
         },
         opts = {},
     },
-    -- Better comments
-    {
-        "folke/todo-comments.nvim",
-        event = { "BufReadPost", "BufNewFile" },
-        opts = {},
-        config = function(_, opts)
-            local todo = require("todo-comments")
-            todo.setup(opts)
-            vim.keymap.set(
-                "n",
-                "<leader>lt",
-                "<cmd>TodoLocList<CR>",
-                { desc = "Open todos in location list" }
-            )
-        end,
-    },
-    -- Lazygit integration
-    {
-        "kdheepak/lazygit.nvim",
-        keys = {
-            { "gl", "<cmd>LazyGit<CR>", desc = "Open lazygit" },
-        },
-    },
     -- Format runner
     {
         "mhartington/formatter.nvim",
@@ -433,6 +411,7 @@ require("lazy").setup({
                     lua = { require("formatter.filetypes.lua").stylua },
                     python = { require("formatter.filetypes.python").black },
                     c = { require("formatter.defaults.clangformat") },
+                    cpp = { require("formatter.defaults.clangformat") },
                 },
             }
         end,
