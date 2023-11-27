@@ -312,6 +312,11 @@ require("lazy").setup({
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
+            -- AI
+            {
+                "Exafunction/codeium.nvim",
+                opts = {},
+            },
         },
         opts = function()
             local cmp = require("cmp")
@@ -433,13 +438,5 @@ require("lazy").setup({
         opts = {
             snippet_engine = "luasnip",
         },
-    },
-    -- AI
-    {
-        "Exafunction/codeium.nvim",
-        -- opts = {},
-        config = function()
-            require("codeium").setup({})
-        end,
     },
 })
