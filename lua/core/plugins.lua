@@ -338,6 +338,7 @@ require("lazy").setup({
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 }),
                 sources = cmp.config.sources({
+                    { name = "codeium" },
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "buffer" },
@@ -432,5 +433,13 @@ require("lazy").setup({
         opts = {
             snippet_engine = "luasnip",
         },
+    },
+    -- AI
+    {
+        "Exafunction/codeium.nvim",
+        -- opts = {},
+        config = function()
+            require("codeium").setup({})
+        end,
     },
 })
