@@ -26,16 +26,19 @@ require("lazy").setup({
             kanagawa.load("wave")
         end,
     },
-    -- Helpful lua library
+    -- Lua library
     { "nvim-lua/plenary.nvim", lazy = true },
     -- Blazingly fast file navigation
     {
         "ThePrimeagen/harpoon",
         keys = function()
-            local mark = require("harpoon.mark")
             local ui = require("harpoon.ui")
             return {
-                { "<C-e>", mark.add_file, desc = "Add file to menu" },
+                {
+                    "<C-e>",
+                    require("harpoon.mark").add_file,
+                    desc = "Add file to menu",
+                },
                 { "<C-m>", ui.toggle_quick_menu, desc = "Toggle menu" },
                 {
                     "<C-t>",
@@ -98,7 +101,12 @@ require("lazy").setup({
     -- Status line
     { "nvim-lualine/lualine.nvim", event = "VeryLazy", opts = {} },
     -- Auto pairs
-    { "windwp/nvim-autopairs", lazy = true, opts = {} },
+    {
+        "altermo/ultimate-autopair.nvim",
+        event = { "InsertEnter", "CmdlineEnter" },
+        branch = "v0.6",
+        opts = {},
+    },
     -- Almighty syntax, smart selection and new text objects
     {
         "nvim-treesitter/nvim-treesitter",
@@ -114,6 +122,7 @@ require("lazy").setup({
             indent = { enable = true },
             ensure_installed = {
                 "bash",
+                "toml",
                 "json",
                 "yaml",
                 "query",
@@ -177,7 +186,15 @@ require("lazy").setup({
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            { "williamboman/mason.nvim", opts = {} },
+            {
+                "williamboman/mason.nvim",
+                opts = {
+                    ui = {
+                        border = "rounded",
+                        width = 0.5,
+                    },
+                },
+            },
             {
                 "williamboman/mason-lspconfig.nvim",
                 opts = {
@@ -208,10 +225,7 @@ require("lazy").setup({
                 },
             })
             lsp.pyright.setup({ capabilities = capabilities })
-            lsp.clangd.setup({
-                capabilities = capabilities,
-                cmd = { "clangd", "--header-insertion=never" },
-            })
+            lsp.clangd.setup({ capabilities = capabilities })
 
             vim.keymap.set(
                 "n",
