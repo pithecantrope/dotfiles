@@ -17,12 +17,11 @@ require("lazy").setup({
         "rebelot/kanagawa.nvim",
         lazy = false,
         priority = 1000,
-        opts = {
-            compile = true, -- :KanagawaCompile
-        },
-        config = function(_, opts)
+        config = function()
             local kanagawa = require("kanagawa")
-            kanagawa.setup(opts)
+            kanagawa.setup({
+                compile = true, -- :KanagawaCompile
+            })
             kanagawa.load("wave")
         end,
     },
@@ -31,59 +30,29 @@ require("lazy").setup({
     -- Blazingly fast file navigation
     {
         "ThePrimeagen/harpoon",
+        ---@type function
         keys = function()
+            local mark = require("harpoon.mark")
             local ui = require("harpoon.ui")
             return {
-                {
-                    "<C-e>",
-                    require("harpoon.mark").add_file,
-                    desc = "Add file to menu",
-                },
+                { "<C-e>", mark.add_file, desc = "Add file to menu" },
                 { "<C-m>", ui.toggle_quick_menu, desc = "Toggle menu" },
-                {
-                    "<C-t>",
-                    function()
-                        ui.nav_file(1)
-                    end,
-                    desc = "Go to 1st file",
-                },
-                {
-                    "<C-g>",
-                    function()
-                        ui.nav_file(2)
-                    end,
-                    desc = "Go to 2nd file",
-                },
-                {
-                    "<C-h>",
-                    function()
-                        ui.nav_file(3)
-                    end,
-                    desc = "Go to 3rd file",
-                },
-                {
-                    "<C-y>",
-                    function()
-                        ui.nav_file(4)
-                    end,
-                    desc = "Go to 4th file",
-                },
+                { "<C-t>", function() ui.nav_file(1) end, desc = "Go to 1st file" },
+                { "<C-g>", function() ui.nav_file(2) end, desc = "Go to 2nd file" },
+                { "<C-h>", function() ui.nav_file(3) end, desc = "Go to 3rd file" },
+                { "<C-y>", function() ui.nav_file(4) end, desc = "Go to 4th file" },
             }
         end,
     },
     -- Fuzzy finder
     {
         "nvim-telescope/telescope.nvim",
+        ---@type function
         keys = function()
             local builtin = require("telescope.builtin")
             return {
                 { "<leader>ff", builtin.find_files, desc = "Find files by name" },
                 { "<leader>fg", builtin.live_grep, desc = "Find files by content" },
-                {
-                    "<leader>fc",
-                    builtin.command_history,
-                    desc = "Find commands in history",
-                },
                 { "<leader>fh", builtin.help_tags, desc = "Find nvim help" },
                 { "<leader>fk", builtin.keymaps, desc = "Find keymappings" },
             }
@@ -92,9 +61,7 @@ require("lazy").setup({
             "nvim-telescope/telescope-fzf-native.nvim",
             build = "make",
         },
-        config = function()
-            require("telescope").load_extension("fzf")
-        end,
+        config = function() require("telescope").load_extension("fzf") end,
     },
     -- Icons
     { "nvim-tree/nvim-web-devicons", lazy = true },
@@ -112,7 +79,16 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         event = { "BufReadPost", "BufNewFile" },
-        dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            {
+                "nvim-treesitter/nvim-treesitter-context",
+                opts = {
+                    mode = "cursor",
+                    max_lines = 3,
+                },
+            },
+        },
         opts = {
             auto_install = false,
             highlight = {
@@ -151,6 +127,13 @@ require("lazy").setup({
                 },
             },
             textobjects = {
+                move = {
+                    enable = true,
+                    goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
+                    goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
+                    goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
+                    goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
+                },
                 select = {
                     enable = true,
                     lookahead = true,
@@ -177,9 +160,7 @@ require("lazy").setup({
                 },
             },
         },
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
-        end,
+        config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
     },
     -- Language Server Protocol support
     {
@@ -233,12 +214,7 @@ require("lazy").setup({
                 vim.diagnostic.open_float,
                 { desc = "Show more diagnostic info in a floating window" }
             )
-            vim.keymap.set(
-                "n",
-                "<leader>ld",
-                vim.diagnostic.setloclist,
-                { desc = "Open diagnostics in location list" }
-            )
+            vim.keymap.set("n", "<leader>ld", vim.diagnostic.setloclist, { desc = "Open diagnostics in location list" })
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
@@ -284,30 +260,6 @@ require("lazy").setup({
                         buffer = ev.buf,
                         desc = "List references to the word in the quickfix window",
                     })
-                    vim.keymap.set(
-                        "n",
-                        "<leader>wa",
-                        vim.lsp.buf.add_workspace_folder,
-                        {
-                            buffer = ev.buf,
-                            desc = "Add the folder to the workspace folders",
-                        }
-                    )
-                    vim.keymap.set(
-                        "n",
-                        "<leader>wr",
-                        vim.lsp.buf.remove_workspace_folder,
-                        {
-                            buffer = ev.buf,
-                            desc = "Remove the folder from the workspace folders",
-                        }
-                    )
-                    vim.keymap.set("n", "<leader>wl", function()
-                        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                    end, {
-                        buffer = ev.buf,
-                        desc = "Print workspace folders",
-                    })
                 end,
             })
 
@@ -338,12 +290,12 @@ require("lazy").setup({
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
-            "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
             -- AI
             {
                 "Exafunction/codeium.nvim",
+                commit = "822e762", -- HACK:The last one doesn't seem to work.
                 opts = {},
             },
             -- Pictograms
