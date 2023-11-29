@@ -74,7 +74,7 @@ require("lazy").setup({
         branch = "v0.6",
         opts = {},
     },
-    -- Almighty syntax, smart selection and new text objects
+    -- Almighty syntax, context and new text objects
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -412,27 +412,22 @@ require("lazy").setup({
     },
     -- Format runner
     {
-        "mhartington/formatter.nvim",
-        event = "BufWritePost",
-        opts = function()
-            return {
-                logging = true,
-                log_level = vim.log.levels.WARN,
-                filetype = {
-                    lua = { require("formatter.filetypes.lua").stylua },
-                    python = { require("formatter.filetypes.python").black },
-                    c = { require("formatter.defaults.clangformat") },
-                    cpp = { require("formatter.defaults.clangformat") },
+        {
+            "stevearc/conform.nvim",
+            event = "BufWritePre",
+            opts = {
+                formatters_by_ft = {
+                    lua = { "stylua" },
+                    python = { "black" },
+                    c = { "clangformat" },
+                    cpp = { "clangformat" },
                 },
-            }
-        end,
-        config = function(_, opts)
-            require("formatter").setup(opts)
-            vim.api.nvim_create_autocmd("BufWritePost", {
-                group = vim.api.nvim_create_augroup("FormatAutogroup", {}),
-                command = "FormatWrite",
-            })
-        end,
+                format_on_save = {
+                    timeout_ms = 500,
+                    lsp_fallback = true,
+                },
+            },
+        },
     },
     -- Annotation generator
     {
@@ -449,7 +444,7 @@ require("lazy").setup({
         "stevearc/aerial.nvim",
         opts = {},
         keys = {
-            { "<leader>N", "<cmd>AerialOpen<cr>", desc = "Navigation" },
+            { "<leader>N", "<cmd>AerialOpen<cr>", desc = "Open navigation" },
         },
     },
 })
