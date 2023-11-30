@@ -53,13 +53,12 @@ require("lazy").setup({
             return {
                 { "<leader>ff", builtin.find_files, desc = "Find files by name" },
                 { "<leader>fg", builtin.live_grep, desc = "Find files by content" },
+                { "<leader>fm", builtin.man_pages, desc = "Find man pages" },
                 { "<leader>fh", builtin.help_tags, desc = "Find nvim help" },
-                { "<leader>fk", builtin.keymaps, desc = "Find keymappings" },
             }
         end,
         dependencies = {
-            "nvim-telescope/telescope-fzf-native.nvim",
-            build = "make",
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
         config = function() require("telescope").load_extension("fzf") end,
     },
@@ -83,6 +82,13 @@ require("lazy").setup({
             "nvim-treesitter/nvim-treesitter-textobjects",
             {
                 "nvim-treesitter/nvim-treesitter-context",
+                keys = {
+                    {
+                        "<leader>c",
+                        function() require("treesitter-context").go_to_context() end,
+                        desc = "Jump to context",
+                    },
+                },
                 opts = {
                     mode = "cursor",
                     max_lines = 3,
@@ -295,7 +301,6 @@ require("lazy").setup({
             -- AI
             {
                 "Exafunction/codeium.nvim",
-                commit = "822e762", -- HACK:The last one doesn't seem to work.
                 opts = {},
             },
             -- Pictograms
@@ -445,6 +450,38 @@ require("lazy").setup({
         opts = {},
         keys = {
             { "<leader>N", "<cmd>AerialOpen<cr>", desc = "Open navigation" },
+        },
+    },
+    -- Git signs
+    {
+        "lewis6991/gitsigns.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        opts = {
+            signs = {
+                add = { text = "▎" },
+                change = { text = "▎" },
+                delete = { text = "" },
+                topdelete = { text = "" },
+                changedelete = { text = "▎" },
+                untracked = { text = "▎" },
+            },
+            on_attach = function(buffer)
+                local gs = package.loaded.gitsigns
+
+                local function map(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc }) end
+
+                map("n", "]h", gs.next_hunk, "Next hunk")
+                map("n", "[h", gs.prev_hunk, "Prev hunk")
+                map({ "n", "v" }, "ghs", ":Gitsigns stage_hunk<CR>", "Stage hunk")
+                map({ "n", "v" }, "ghr", ":Gitsigns reset_hunk<CR>", "Reset hunk")
+                map("n", "ghu", gs.undo_stage_hunk, "Undo stage hunk")
+                map("n", "ghS", gs.stage_buffer, "Stage buffer")
+                map("n", "ghR", gs.reset_buffer, "Reset buffer")
+                map("n", "ghp", gs.preview_hunk, "Preview hunk")
+                map("n", "ghb", function() gs.blame_line({ full = true }) end, "Blame line")
+                map("n", "ghd", gs.diffthis, "Diff this")
+                map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Select hunk")
+            end,
         },
     },
 })
