@@ -331,9 +331,7 @@ require("lazy").setup({
                     completeopt = "menu,menuone,noinsert",
                 },
                 mapping = {
-                    ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
                     ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-                    ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
                     ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-u>"] = cmp.mapping.scroll_docs(4),
@@ -361,6 +359,14 @@ require("lazy").setup({
                     { name = "luasnip" },
                     { name = "path" },
                 }),
+                performance = {
+                    debounce = 60,
+                    throttle = 30,
+                    fetching_timeout = 500,
+                    confirm_resolve_timeout = 500,
+                    async_budget = 1,
+                    max_view_entries = 200,
+                },
             }
         end,
     },
@@ -430,6 +436,13 @@ require("lazy").setup({
                 format_on_save = {
                     timeout_ms = 500,
                     lsp_fallback = true,
+                },
+                formatters = {
+                    injected = {
+                        options = {
+                            ignore_errors = true,
+                        },
+                    },
                 },
             },
         },
