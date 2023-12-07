@@ -171,8 +171,10 @@ require("lazy").setup({
     -- Language Server Protocol support
     {
         "neovim/nvim-lspconfig",
-        event = { "BufReadPre", "BufNewFile" },
+        event = { "BufReadPost", "BufNewFile" },
         dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            -- Servers manager
             {
                 "williamboman/mason.nvim",
                 opts = {
@@ -193,7 +195,6 @@ require("lazy").setup({
                 },
             },
             { "folke/neodev.nvim", opts = {} },
-            "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
             local lsp = require("lspconfig")
@@ -296,13 +297,8 @@ require("lazy").setup({
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
-            "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
-            -- AI
-            {
-                "Exafunction/codeium.nvim",
-                opts = {},
-            },
+            "hrsh7th/cmp-path",
             -- Pictograms
             "onsails/lspkind.nvim",
         },
@@ -354,19 +350,10 @@ require("lazy").setup({
                     }),
                 },
                 sources = cmp.config.sources({
-                    { name = "codeium" },
-                    { name = "nvim_lsp" },
                     { name = "luasnip" },
+                    { name = "nvim_lsp" },
                     { name = "path" },
                 }),
-                performance = {
-                    debounce = 60,
-                    throttle = 30,
-                    fetching_timeout = 500,
-                    confirm_resolve_timeout = 500,
-                    async_budget = 1,
-                    max_view_entries = 200,
-                },
             }
         end,
     },
@@ -437,13 +424,7 @@ require("lazy").setup({
                     timeout_ms = 500,
                     lsp_fallback = true,
                 },
-                formatters = {
-                    injected = {
-                        options = {
-                            ignore_errors = true,
-                        },
-                    },
-                },
+                notify_on_error = false,
             },
         },
     },
@@ -492,7 +473,6 @@ require("lazy").setup({
                 map("n", "ghR", gs.reset_buffer, "Reset buffer")
                 map("n", "ghp", gs.preview_hunk, "Preview hunk")
                 map("n", "ghb", function() gs.blame_line({ full = true }) end, "Blame line")
-                map("n", "ghd", gs.diffthis, "Diff this")
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Select hunk")
             end,
         },

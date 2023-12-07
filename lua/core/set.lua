@@ -19,5 +19,6 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.signcolumn = "yes"
+vim.opt.numberwidth = 20
 vim.opt.termguicolors = true
 vim.opt.updatetime = 50
