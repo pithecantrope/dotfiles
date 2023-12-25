@@ -14,16 +14,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- Theme
     {
-        "rebelot/kanagawa.nvim",
+        "dasupradyumna/midnight.nvim",
         lazy = false,
         priority = 1000,
-        config = function()
-            local kanagawa = require("kanagawa")
-            kanagawa.setup({
-                compile = true, -- :KanagawaCompile
-            })
-            kanagawa.load("wave")
-        end,
+        config = function() vim.cmd.colorscheme("midnight") end,
     },
     -- Lua library
     { "nvim-lua/plenary.nvim", lazy = true },
@@ -476,5 +470,9 @@ require("lazy").setup({
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Select hunk")
             end,
         },
+    },
+}, {
+    ui = {
+        border = "rounded",
     },
 })
