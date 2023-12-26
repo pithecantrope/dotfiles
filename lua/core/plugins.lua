@@ -471,6 +471,16 @@ require("lazy").setup({
             end,
         },
     },
+    -- Quick surround
+    {
+        "kylechui/nvim-surround",
+        keys = {
+            { "ys", desc = "Add surround" },
+            { "cs", desc = "Change surround" },
+            { "ds", desc = "Delete surround" },
+        },
+        opts = {},
+    },
 }, {
     ui = {
         border = "rounded",
