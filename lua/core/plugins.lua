@@ -41,6 +41,7 @@ require("lazy").setup({
     -- Fuzzy finder
     {
         "nvim-telescope/telescope.nvim",
+        cmd = "Telescope",
         ---@type function
         keys = function()
             local builtin = require("telescope.builtin")
@@ -455,7 +456,6 @@ require("lazy").setup({
             },
             on_attach = function(buffer)
                 local gs = package.loaded.gitsigns
-
                 local function map(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc }) end
 
                 map("n", "]h", gs.next_hunk, "Next hunk")
@@ -478,8 +478,18 @@ require("lazy").setup({
             { "ys", desc = "Add surround" },
             { "cs", desc = "Change surround" },
             { "ds", desc = "Delete surround" },
+            { "gs", mode = "x", desc = "Add surround (visual)" },
         },
-        opts = {},
+        opts = {
+            keymaps = {
+                visual = "gs",
+            },
+        },
+    },
+    -- Focus motion
+    {
+        "ggandor/leap.nvim",
+        config = function() require("leap").create_default_mappings() end,
     },
 }, {
     ui = {
