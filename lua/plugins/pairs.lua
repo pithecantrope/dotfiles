@@ -10,11 +10,11 @@ return {
             { "ys", desc = "Add surround" },
             { "cs", desc = "Change surround" },
             { "ds", desc = "Delete surround" },
-            { "gs", mode = "x", desc = "Add surround (visual)" },
+            { "<C-s>", mode = "x", desc = "Add surround (visual)" },
         },
         opts = {
             keymaps = {
-                visual = "gs",
+                visual = "<C-s>",
             },
         },
     },
