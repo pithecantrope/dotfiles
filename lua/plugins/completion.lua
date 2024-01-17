@@ -55,7 +55,6 @@ return {
                 }),
             },
             sources = cmp.config.sources({
-                { name = "luasnip" },
                 { name = "nvim_lsp" },
                 { name = "path" },
             }),
