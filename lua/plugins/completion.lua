@@ -45,7 +45,6 @@ return {
                     maxwidth = 40,
                     ellipsis_char = "...",
                     symbol_map = {
-                        Codeium = "",
                         Module = "",
                         Operator = "",
                         Property = "",
