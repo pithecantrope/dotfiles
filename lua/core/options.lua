@@ -9,7 +9,6 @@ options.updatetime = 50
 options.number = true
 options.relativenumber = true
 options.signcolumn = "yes"
-options.numberwidth = 20
 
 options.hlsearch = false
 options.incsearch = true
