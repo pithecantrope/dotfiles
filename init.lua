@@ -7,7 +7,7 @@ if vim.g.neovide then
     vim.opt.linespace = 2
     vim.g.neovide_fullscreen = true
     vim.g.neovide_hide_mouse_when_typing = true
-    vim.g.neovide_padding_left = 256
+    vim.g.neovide_padding_left = 104
 else
     vim.opt.numberwidth = 20
 end
