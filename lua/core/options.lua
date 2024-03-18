@@ -1,22 +1,19 @@
-local options = vim.opt
+vim.opt.mouse = ""
+vim.opt.termguicolors = true
+vim.opt.swapfile = false
+vim.opt.updatetime = 50
 
-options.mouse = ""
-options.fileformat = "unix"
-options.termguicolors = true
-options.swapfile = false
-options.updatetime = 50
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes"
 
-options.number = true
-options.relativenumber = true
-options.signcolumn = "yes"
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+vim.opt.scrolloff = 8
+vim.opt.wrap = false
 
-options.hlsearch = false
-options.incsearch = true
-options.scrolloff = 8
-options.wrap = false
-
-options.tabstop = 4
-options.softtabstop = 4
-options.shiftwidth = 4
-options.expandtab = true
-options.autoindent = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.autoindent = true

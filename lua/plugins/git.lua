@@ -22,7 +22,7 @@ return {
             map("n", "ghS", gs.stage_buffer, "Stage buffer")
             map("n", "ghR", gs.reset_buffer, "Reset buffer")
             map("n", "ghp", gs.preview_hunk, "Preview hunk")
-            map("n", "ghb", function() gs.blame_line({ full = true }) end, "Blame line")
+            map("n", "ghb", gs.blame_line, "Blame line")
             map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Select hunk")
         end,
     },

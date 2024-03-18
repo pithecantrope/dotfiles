@@ -1,33 +1,31 @@
-local set = vim.keymap.set
+vim.keymap.set({ "n", "i", "v" }, "<Up>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<Down>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<Left>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<Right>", "<Nop>")
+vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("n", "<CR>", "<Return>")
 
-set({ "n", "i", "v" }, "<Up>", "<Nop>")
-set({ "n", "i", "v" }, "<Down>", "<Nop>")
-set({ "n", "i", "v" }, "<Left>", "<Nop>")
-set({ "n", "i", "v" }, "<Right>", "<Nop>")
-set("i", "<C-c>", "<Esc>")
-set("n", "<CR>", "<Return>")
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
 
-set("n", "J", "mzJ`z")
-set("n", "<C-d>", "<C-d>zz")
-set("n", "<C-u>", "<C-u>zz")
-set("n", "n", "nzz")
-set("n", "N", "Nzz")
-
-set("n", "<C-j>", "<cmd>cnext<CR>zz")
-set("n", "<C-k>", "<cmd>cprev<CR>zz")
-set("n", "<C-l>", "<cmd>lnext<CR>zz")
-set("n", "<C-;>", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<C-l>", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<C-;>", "<cmd>lprev<CR>zz")
 
 vim.g.mapleader = " "
 
-set({ "n", "v" }, "<leader>d", [["_d]])
-set("n", "<leader>df", [[gg"_dG]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+vim.keymap.set("n", "<leader>df", [[gg"_dG]])
 
-set({ "n", "v" }, "<leader>y", [["+y]])
-set("n", "<leader>Y", [["+y$]])
-set("n", "<leader>yf", [[gg"+yG]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+y$]])
+vim.keymap.set("n", "<leader>yf", [[gg"+yG]])
 
-set({ "n", "v" }, "<leader>p", [["+p]])
-set({ "n", "v" }, "<leader>P", [["+P]])
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
+vim.keymap.set({ "n", "v" }, "<leader>P", [["+P]])
 
-set("n", "<leader>q", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>q", vim.cmd.Ex)

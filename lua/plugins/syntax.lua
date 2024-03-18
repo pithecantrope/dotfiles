@@ -46,6 +46,7 @@ return {
             "make",
             "doxygen",
             "cpp",
+            "haskell",
         },
         incremental_selection = {
             enable = true,

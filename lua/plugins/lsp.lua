@@ -3,7 +3,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
-        -- Servers manager
+        -- Package manager
         {
             "williamboman/mason.nvim",
             opts = {
@@ -20,11 +20,17 @@ return {
                     "lua_ls",
                     "pyright",
                     "clangd",
+                    "hls",
                 },
             },
         },
-        -- Proper lua lsp setup
-        { "folke/neodev.nvim", opts = {} },
+        -- Lua lsp setup
+        { "folke/neodev.nvim", ft = { "lua" }, opts = {} },
+        -- Haskell lsp setup
+        {
+            "mrcjkb/haskell-tools.nvim",
+            ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+        },
     },
     config = function()
         local lsp = require("lspconfig")
