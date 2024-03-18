@@ -25,12 +25,7 @@ return {
             },
         },
         -- Lua lsp setup
-        { "folke/neodev.nvim", ft = { "lua" }, opts = {} },
-        -- Haskell lsp setup
-        {
-            "mrcjkb/haskell-tools.nvim",
-            ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-        },
+        { "folke/neodev.nvim", opts = {} },
     },
     config = function()
         local lsp = require("lspconfig")
