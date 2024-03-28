@@ -7,6 +7,7 @@ return {
             python = { "black" },
             c = { "clangformat" },
             cpp = { "clangformat" },
+            go = { "fumpt", "golines" },
         },
         format_on_save = {
             timeout_ms = 500,

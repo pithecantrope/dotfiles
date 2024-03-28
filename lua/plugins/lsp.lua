@@ -20,7 +20,7 @@ return {
                     "lua_ls",
                     "pyright",
                     "clangd",
-                    "hls",
+                    "gopls",
                 },
             },
         },
@@ -45,6 +45,14 @@ return {
         })
         lsp.pyright.setup({ capabilities = capabilities })
         lsp.clangd.setup({ capabilities = capabilities })
+        lsp.gopls.setup({
+            capabilities = capabilities,
+            settings = {
+                gopls = {
+                    usePlaceholders = true,
+                },
+            },
+        })
 
         vim.keymap.set("n", "<leader>M", vim.diagnostic.open_float, { desc = "Show diagnostic info" })
         vim.keymap.set("n", "<leader>ld", vim.diagnostic.setloclist, { desc = "List diagnostics" })
