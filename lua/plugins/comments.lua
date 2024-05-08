@@ -14,6 +14,7 @@ return {
     },
     {
         "folke/todo-comments.nvim",
+        event = { "BufReadPost", "BufNewFile" },
         opts = {},
         config = function(_, opts)
             local todo = require("todo-comments")

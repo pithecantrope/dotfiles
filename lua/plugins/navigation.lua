@@ -4,7 +4,7 @@ return {
     keys = function()
         local harpoon = require("harpoon")
         return {
-            { "<C-e>", function() harpoon:list():append() end, desc = "Tag a harpoon file" },
+            { "<C-e>", function() harpoon:list():add() end, desc = "Tag a harpoon file" },
             {
                 "<C-m>",
                 function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
