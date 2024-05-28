@@ -29,3 +29,4 @@ vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
 vim.keymap.set({ "n", "v" }, "<leader>P", [["+P]])
 
 vim.keymap.set("n", "<leader>q", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>x", [[yyo<Enter>"<Enter><Enter>"<Esc>PkddV:!/bin/zsh<CR>]])
