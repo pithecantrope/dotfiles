@@ -6,6 +6,7 @@ vim.opt.updatetime = 50
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
+vim.opt.numberwidth = 20
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true

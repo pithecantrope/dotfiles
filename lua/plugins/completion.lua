@@ -3,7 +3,6 @@ return {
     event = "InsertEnter",
     dependencies = {
         "hrsh7th/cmp-path",
-        -- Pictograms
         "onsails/lspkind.nvim",
     },
     opts = function()
@@ -11,20 +10,18 @@ return {
 
         return {
             snippet = {
-                expand = function(args) require("luasnip").lsp_expand(args.body) end,
+                expand = function(args) vim.snippet.expand(args.body) end,
             },
             window = {
                 completion = {
                     border = "rounded",
                     winhighlight = "NormalFloat:FloatBorder,CursorLine:Visual,Search:None",
-                    col_offset = -3,
-                    side_padding = 1,
                     scrollbar = false,
                 },
                 documentation = {
                     border = "rounded",
-                    scrollbar = false,
                     winhighlight = "NormalFloat:FloatBorder,CursorLine:Visual,Search:None",
+                    scrollbar = false,
                 },
             },
             completion = {
@@ -39,18 +36,7 @@ return {
                 ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
             },
             formatting = {
-                fields = { "kind", "abbr", "menu" },
-                format = require("lspkind").cmp_format({
-                    mode = "symbol",
-                    maxwidth = 40,
-                    ellipsis_char = "...",
-                    symbol_map = {
-                        Module = "",
-                        Operator = "",
-                        Property = "",
-                        TypeParameter = "T",
-                    },
-                }),
+                format = require("lspkind").cmp_format(),
             },
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },

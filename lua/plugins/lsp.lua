@@ -3,7 +3,6 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
-        -- Package manager
         {
             "williamboman/mason.nvim",
             opts = {
@@ -23,7 +22,6 @@ return {
                 },
             },
         },
-        -- Lua lsp setup
         { "folke/neodev.nvim", opts = {} },
     },
     config = function()
@@ -47,6 +45,7 @@ return {
 
         vim.keymap.set("n", "<leader>M", vim.diagnostic.open_float, { desc = "Show diagnostic info" })
         vim.keymap.set("n", "<leader>ld", vim.diagnostic.setloclist, { desc = "List diagnostics" })
+
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(ev)
