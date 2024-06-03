@@ -14,12 +14,8 @@ return {
                 capabilities = capabilities,
                 settings = {
                     Lua = {
-                        workspace = {
-                            checkThirdParty = false,
-                        },
-                        completion = {
-                            callSnippet = "Replace",
-                        },
+                        workspace = { checkThirdParty = false },
+                        completion = { callSnippet = "Replace" },
                     },
                 },
             })
@@ -56,10 +52,7 @@ return {
                 c = { "clangformat" },
                 cpp = { "clangformat" },
             },
-            format_on_save = {
-                timeout_ms = 500,
-                lsp_fallback = true,
-            },
+            format_on_save = { timeout_ms = 500, lsp_fallback = true },
             notify_on_error = false,
         },
     },
