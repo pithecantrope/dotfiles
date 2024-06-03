@@ -15,17 +15,25 @@ vim.keymap.set("n", "<C-;>", "<cmd>lprev<CR>zz")
 vim.keymap.set({ "i", "s" }, "<C-j>", function() vim.snippet.jump(1) end)
 vim.keymap.set({ "i", "s" }, "<C-k>", function() vim.snippet.jump(-1) end)
 
+vim.keymap.set({ "n", "v" }, "x", "\"_x")
+vim.keymap.set({ "n", "v" }, "X", "\"_X")
+vim.keymap.set({ "n", "v" }, "c", "\"_c")
+vim.keymap.set({ "n", "v" }, "C", "\"_C")
+
+vim.keymap.set("n", "<C-s>", ":w<CR><C-z>")
+vim.keymap.set("n", "<C-q>", ":wq<CR>")
+
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>,", "mzA,<Esc>`z")
 vim.keymap.set("n", "<leader>;", "mzA;<Esc>`z")
 vim.keymap.set("n", "<leader>\\", "mzA\\<Esc>`z")
 
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
-vim.keymap.set({ "n", "v" }, "<leader>P", [["+P]])
-vim.keymap.set("n", "<leader>x", [[gg"_dG]])
-vim.keymap.set("n", "<leader>w", [[gg"+yG]])
+vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d")
+vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y")
+vim.keymap.set({ "n", "v" }, "<leader>p", "\"+p")
+vim.keymap.set({ "n", "v" }, "<leader>P", "\"+P")
 
+vim.keymap.set("n", "<leader>z", "mzgg\"+yG`z")
+vim.keymap.set("n", "<leader>x", "gg\"_dG")
 vim.keymap.set("n", "<leader>q", vim.cmd.Ex)
