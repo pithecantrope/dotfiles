@@ -20,14 +20,7 @@ vim.keymap.set({ "n", "v" }, "X", "\"_X")
 vim.keymap.set({ "n", "v" }, "c", "\"_c")
 vim.keymap.set({ "n", "v" }, "C", "\"_C")
 
-vim.keymap.set("n", "<C-s>", ":w<CR><C-z>")
-vim.keymap.set("n", "<C-q>", ":wq<CR>")
-
 vim.g.mapleader = " "
-
-vim.keymap.set("n", "<leader>,", "mzA,<Esc>`z")
-vim.keymap.set("n", "<leader>;", "mzA;<Esc>`z")
-vim.keymap.set("n", "<leader>\\", "mzA\\<Esc>`z")
 
 vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d")
 vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y")
