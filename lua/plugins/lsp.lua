@@ -2,11 +2,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPost", "BufNewFile" },
-        dependencies = {
-            { "williamboman/mason.nvim", opts = {} },
-            { "williamboman/mason-lspconfig.nvim", opts = {} },
-            "hrsh7th/cmp-nvim-lsp",
-        },
+        dependencies = "hrsh7th/cmp-nvim-lsp",
         config = function()
             local lsp = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -19,7 +15,6 @@ return {
                     },
                 },
             })
-            lsp.pyright.setup({ capabilities = capabilities })
             lsp.clangd.setup({ capabilities = capabilities })
 
             vim.keymap.set("n", "<leader>M", vim.diagnostic.open_float)
@@ -48,9 +43,7 @@ return {
         opts = {
             formatters_by_ft = {
                 lua = { "stylua" },
-                python = { "black" },
                 c = { "clangformat" },
-                cpp = { "clangformat" },
             },
             format_on_save = { timeout_ms = 500, lsp_fallback = true },
             notify_on_error = false,
