@@ -1,13 +1,12 @@
 TARGET_EXEC := bin
 BUILD_DIR := ./build
 SRC_DIR := ./src
-INC_DIR := ./inc
 
 CC := gcc
 CFLAGS := -O0 -g -Werror -Wall -Wextra -std=c17
 # CFLAGS := -O3 -std=c17
 LDFLAGS :=
-CPPFLAGS := -I$(SRC_DIR)/$(INC_DIR) -MMD -MP
+CPPFLAGS := -MMD -MP
 VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose
 
 SRCS := $(wildcard $(SRC_DIR)/*.c)
