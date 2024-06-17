@@ -3,6 +3,7 @@ vim.opt.termguicolors = true
 vim.opt.swapfile = false
 vim.opt.updatetime = 50
 
+vim.g.netrw_banner = 0
 vim.opt.number = true
 vim.opt.signcolumn = "yes"
 vim.opt.numberwidth = 16
