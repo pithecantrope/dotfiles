@@ -6,7 +6,6 @@ vim.opt.updatetime = 50
 vim.g.netrw_banner = 0
 vim.opt.number = true
 vim.opt.signcolumn = "yes"
-vim.opt.numberwidth = 16
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
