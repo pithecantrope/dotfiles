@@ -18,19 +18,19 @@ DEPS := $(OBJS:.o=.d)
 all: $(BUILD_DIR)/$(TARGET_EXEC)
 
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
-	$(CC) $^ -o $@ $(LDFLAGS)
+	@$(CC) $^ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 run:
 	@$(BUILD_DIR)/$(TARGET_EXEC) ${ARGS}
 
 clean:
-	rm -rf $(BUILD_DIR)
+	@rm -rf $(BUILD_DIR)
 
 valgrind:
-	valgrind $(VALGRIND_FLAGS) $(BUILD_DIR)/$(TARGET_EXEC) ${ARGS} | less
+	@valgrind $(VALGRIND_FLAGS) $(BUILD_DIR)/$(TARGET_EXEC) ${ARGS} | less
 
 -include $(DEPS)
