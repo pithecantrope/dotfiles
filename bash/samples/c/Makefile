@@ -31,6 +31,6 @@ clean:
 	@rm -rf $(BUILD_DIR)
 
 valgrind:
-	@valgrind $(VALGRIND_FLAGS) $(BUILD_DIR)/$(TARGET_EXEC) ${ARGS} | less
+	@valgrind $(VALGRIND_FLAGS) $(BUILD_DIR)/$(TARGET_EXEC) ${ARGS}
 
 -include $(DEPS)

@@ -21,7 +21,7 @@ return {
             local harpoon = require("harpoon")
             return {
                 { "<C-e>", function() harpoon:list():add() end },
-                { "<C-m>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end },
+                { "<C-q>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end },
                 { "<C-t>", function() harpoon:list():select(1) end },
                 { "<C-g>", function() harpoon:list():select(2) end },
                 { "<C-h>", function() harpoon:list():select(3) end },
