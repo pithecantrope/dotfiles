@@ -5,18 +5,22 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
+PS1='\[\e[3;33m\]\w \[\e[0;32m\]>\[\e[0m\] '
 
-PS1='\e[0;33m\w \e[0;32m>\e[0m '
-alias vim='nvim'
-alias lg='lazygit'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ls='eza --git-ignore --group-directories-first --icons'
+alias g='gitui'
 
-dir=~/projects/dotfiles
-function new() {
-    [[ ! -e "${$dir/bash/samples/}${1}" ]] && echo "No sample for '${1}'" && return
-    cp   -r "${$dir/bash/samples/}${1}" . ; mv $1 $2 ; cd $2 ; $EDITOR .
+mc() {
+    mkdir -p "${1}" && cd "${1}"
 }
 
-alias dot='cd ${dir} ; $EDITOR .'
-. $dir/bash/.projects
+c() {
+    cd "$(fd --type d | fzf)"
+}
+
+new() {
+    [[ ! -e "${~/projects/dotfiles/bash/samples/}${1}" ]] && echo "No sample for '${1}'" && return
+    cp   -r "${~/projects/dotfiles/bash/samples/}${1}" . ; mv $1 $2 ; cd $2 ; $EDITOR .
+}
