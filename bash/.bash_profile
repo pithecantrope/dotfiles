@@ -4,5 +4,7 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-export BROWSER='firefox'
-export EDITOR='hx'
+export HISTSIZE=2048
+export HISTFILESIZE=2048
+
+startx
