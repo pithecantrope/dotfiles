@@ -6,5 +6,6 @@
 
 export HISTSIZE=2048
 export HISTFILESIZE=2048
+export HISTCONTROL=erasedups
 
 startx
