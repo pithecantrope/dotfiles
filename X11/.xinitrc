@@ -3,6 +3,7 @@ while true; do
 	sleep 1m
 done &
 
+setxkbmap -layout us,ru -option grp:alt_shift_toggle &
 unclutter --timeout 2 --start-hidden &
 
 st &
