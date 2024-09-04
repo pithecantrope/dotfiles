@@ -5,16 +5,16 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Hack:size=10" };
-static const char dmenufont[]       = "Hack:size=10";
+static const char *fonts[]          = { "Hack:size=15" };
+static const char dmenufont[]       = "Hack:size=15";
 static const char black[]           = "#000000";
 static const char white[]           = "#ffffff";
 static const char gray[]            = "#808080";
-static const char orange[]          = "#ff8000";
+static const char cyan[]            = "#00ffff";
 static const char *colors[][3]      = {
 	/*               fg      bg     border   */
 	[SchemeNorm] = { white,  black, gray },
-	[SchemeSel]  = { orange, black, orange },
+	[SchemeSel]  = { cyan,   black, cyan },
 };
 
 /* tagging */
@@ -26,7 +26,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "firefox",  NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Chromium", NULL,       NULL,       1 << 3,       0,           -1 },
 };
 
 /* layout(s) */
@@ -55,7 +55,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", black, "-nf", white, "-sb", black, "-sf", orange, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", black, "-nf", white, "-sb", black, "-sf", cyan, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *brightness_dec[] = { "brightnessctl", "set", "10%-", NULL };
 static const char *brightness_inc[] = { "brightnessctl", "set", "10%+", NULL };

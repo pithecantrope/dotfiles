@@ -14,6 +14,6 @@ setxkbmap -layout us,ru -option grp:alt_caps_toggle &
 unclutter --timeout 1 --start-hidden &
 
 st &
-thorium-browser &
+chromium &
 
 exec dwm
