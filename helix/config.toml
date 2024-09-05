@@ -1,0 +1,7 @@
+theme = "onedark"
+
+[editor.gutters]
+layout = ["diagnostics", "diff"]
+
+[keys.insert]
+C-c = "normal_mode"
