@@ -1,7 +1,13 @@
-theme = "onedark"
+theme = "onelight"
 
 [editor.gutters]
 layout = ["diagnostics", "diff"]
 
+[keys.normal]
+"C-c" = ["keep_primary_selection", "collapse_selection"]
+
 [keys.insert]
-C-c = "normal_mode"
+"C-c" = "normal_mode"
+
+[keys.select]
+"C-c" = ["normal_mode", "keep_primary_selection", "collapse_selection"]

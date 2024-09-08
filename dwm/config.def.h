@@ -10,11 +10,11 @@ static const char dmenufont[]       = "Hack:size=15";
 static const char black[]           = "#000000";
 static const char white[]           = "#ffffff";
 static const char gray[]            = "#808080";
-static const char cyan[]            = "#00ffff";
+static const char blue[]            = "#0000ff";
 static const char *colors[][3]      = {
 	/*               fg      bg     border   */
-	[SchemeNorm] = { white,  black, gray },
-	[SchemeSel]  = { cyan,   black, cyan },
+	[SchemeNorm] = { black,  white, gray },
+	[SchemeSel]  = { blue,   white, blue },
 };
 
 /* tagging */
@@ -55,7 +55,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", black, "-nf", white, "-sb", black, "-sf", cyan, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", white, "-nf", black, "-sb", white, "-sf", blue, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *brightness_dec[] = { "brightnessctl", "set", "10%-", NULL };
 static const char *brightness_inc[] = { "brightnessctl", "set", "10%+", NULL };

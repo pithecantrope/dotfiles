@@ -16,7 +16,7 @@ function mc() {
 }
 
 function c() {
-    cd "$(fd --type d | fzf)"
+    cd "$(fd --type d --exact-depth 2 | fzf)"
 }
 
 function new() {
