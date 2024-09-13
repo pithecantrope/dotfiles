@@ -9,7 +9,9 @@ PS1='\[\e[3;33m\]\w \[\e[0;32m\]>\[\e[0m\] '
 
 alias hx=helix
 alias shx='sudo helix'
+alias p='sudo pacman'
 alias ls='eza --git-ignore --group-directories-first --color --icons'
+
 alias ga='git add'
 alias gb='git branch'
 alias gc='git commit'
