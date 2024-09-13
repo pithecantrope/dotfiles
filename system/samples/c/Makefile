@@ -3,17 +3,16 @@ BUILD_DIR := ./build
 SRC_DIR := ./src
 
 CC := gcc
-CFLAGS := -O0 -g -Werror -Wall -Wextra -std=c17
-# CFLAGS := -O3 -std=c17
-LDFLAGS :=
+CFLAGS := -Og -g3 -fhardened -fsanitize=address,undefined -Werror -Wall -Wextra -std=c17
+# CFLAGS := -O3
+LDFLAGS := -lasan -lubsan
 CPPFLAGS := -MMD -MP
-VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose
 
 SRCS := $(wildcard $(SRC_DIR)/*.c)
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
-.PHONY: all run clean valgrind
+.PHONY: all run clean
 
 all: $(BUILD_DIR)/$(TARGET_EXEC)
 
@@ -29,8 +28,5 @@ run:
 
 clean:
 	@rm -rf $(BUILD_DIR)
-
-valgrind:
-	@valgrind $(VALGRIND_FLAGS) $(BUILD_DIR)/$(TARGET_EXEC) ${ARGS}
 
 -include $(DEPS)
