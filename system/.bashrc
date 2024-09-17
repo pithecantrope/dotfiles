@@ -10,6 +10,7 @@ PS1='\[\e[3;33m\]\w \[\e[0;32m\]>\[\e[0m\] '
 alias hx=helix
 alias shx='sudo helix'
 alias p='sudo pacman'
+alias P='sudo poweroff'
 alias ls='eza --git-ignore --group-directories-first --color --icons'
 
 alias ga='git add'
@@ -33,6 +34,6 @@ function c() {
 }
 
 function new() {
-    [[ ! -e "${HOME}/projects/dotfiles/bash/samples/${1}" ]] && echo "No sample for '${1}'" && return
-    cp   -r "${HOME}/projects/dotfiles/bash/samples/${1}" . ;  mv "${1}" "${2}" ; cd "${2}" ; $EDITOR .
+    [[ ! -e "${HOME}/projects/dotfiles/system/samples/${1}" ]] && echo "No sample for '${1}'" && return
+    cp   -r "${HOME}/projects/dotfiles/system/samples/${1}" . ;  mv "${1}" "${2}" ; cd "${2}" ; $EDITOR .
 }

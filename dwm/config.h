@@ -25,8 +25,10 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Chromium", NULL,       NULL,       1 << 3,       0,           -1 },
+	/* class       instance           title      tags mask     isfloating   monitor */
+	{  NULL,      "chromium",         NULL,      1 << 3,       0,           -1 },
+	{  NULL,      "libreoffice",      NULL,      1 << 2,       0,           -1 },
+	{  NULL,      "pinta",            NULL,      1 << 2,       0,           -1 },
 };
 
 /* layout(s) */
