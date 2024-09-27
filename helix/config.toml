@@ -1,4 +1,4 @@
-theme = "onelight"
+theme = "gruber-darker"
 
 [editor.gutters]
 layout = ["diagnostics", "diff"]

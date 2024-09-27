@@ -13,8 +13,8 @@ static const char gray[]            = "#808080";
 static const char blue[]            = "#0000ff";
 static const char *colors[][3]      = {
 	/*               fg      bg     border   */
-	[SchemeNorm] = { black,  white, gray },
-	[SchemeSel]  = { blue,   white, blue },
+	[SchemeNorm] = { white,  black, gray },
+	[SchemeSel]  = { blue,   black, blue },
 };
 
 /* tagging */
@@ -57,7 +57,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", white, "-nf", black, "-sb", white, "-sf", blue, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", black, "-nf", white, "-sb", black, "-sf", blue, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *brightness_dec[] = { "brightnessctl", "set", "10%-", NULL };
 static const char *brightness_inc[] = { "brightnessctl", "set", "10%+", NULL };
@@ -66,7 +66,6 @@ static const char *volume_inc[] = { "wpctl", "set-volume",  "@DEFAULT_SINK@", "1
 static const char *screenshot_full[]   = { "scrot", NULL };
 static const char *screenshot_region[] = { "scrot", "-s", NULL };
 static const char *lock_screen[]  = { "slock", NULL };
-
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */

@@ -10,4 +10,6 @@ export HISTCONTROL=erasedups
 export EDITOR=helix
 export BROWSER=chromium
 
+export PATH=$PATH:/home/pithecantrope/.local/bin
+
 startx

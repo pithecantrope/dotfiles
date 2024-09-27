@@ -3,9 +3,10 @@ BUILD_DIR := ./build
 SRC_DIR := ./src
 
 CC := gcc
-CFLAGS := -Og -g3 -fhardened -fsanitize=address,undefined -Werror -Wall -Wextra -std=c17
+CFLAGS := -Og -g3 -fsanitize=address,undefined -Werror -Wall -Wextra -std=c17
 # CFLAGS := -O3
-LDFLAGS := -lasan -lubsan
+LDFLAGS :=
+LDFLAGS += -lasan -lubsan
 CPPFLAGS := -MMD -MP
 
 SRCS := $(wildcard $(SRC_DIR)/*.c)
