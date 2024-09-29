@@ -3,9 +3,9 @@ BUILD_DIR := ./build
 SRC_DIR := ./src
 
 CC := gcc
-CFLAGS := -Og -g3 -fsanitize=address,undefined -Werror -Wall -Wextra -std=c17
-# CFLAGS := -O3
 LDFLAGS :=
+# CFLAGS := -O2
+CFLAGS := -O0 -ggdb3 -fsanitize=address,undefined -Werror -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wcast-qual -Wlogical-op -Wswitch-default -Wswitch-enum -Wconversion -Winline -Wdouble-promotion -pedantic-errors -std=c17
 LDFLAGS += -lasan -lubsan
 CPPFLAGS := -MMD -MP
 
