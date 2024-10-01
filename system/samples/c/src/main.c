@@ -2,7 +2,9 @@
 #include <stdlib.h>
 
 int
-main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
+main(int argc, char* argv[]) {
+    (void)argc;
+    (void)argv;
     printf("Hello World!\n");
 
     return EXIT_SUCCESS;
