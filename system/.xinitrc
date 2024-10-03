@@ -2,7 +2,7 @@ while true; do
 	if [ -f /sys/class/power_supply/BAT0/capacity ]; then
 		capacity=$(< /sys/class/power_supply/BAT0/capacity)%
 	else
-		capacity="N/A"
+		capacity='N/A'
 	fi
 	time=$(date +"%H:%M")
 	

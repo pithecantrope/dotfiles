@@ -21,6 +21,7 @@ alias gl='git log -1 HEAD --stat'
 alias gp='git push'
 alias gP='git pull'
 alias gr='git restore'
+alias gR='git reset HEAD~1'
 alias gs='git status'
 
 function mc() {
