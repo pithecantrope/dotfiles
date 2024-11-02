@@ -24,6 +24,10 @@ alias gr='git restore'
 alias gR='git reset HEAD~1'
 alias gs='git status'
 
+function cd() {
+    builtin cd "$@" && ls -a
+}
+
 function mc() {
     mkdir -p "${1}" && cd "${1}"
 }
