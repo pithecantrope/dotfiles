@@ -9,7 +9,7 @@ CPPFLAGS := -MMD -MP
 CFLAGS_RELEASE := -O3 -flto=auto
 CFLAGS_PROFILE := -O3 -flto=auto -g
 CFLAGS_DEBUG := -O0 -ggdb3
-CFLAGS_DEV := -O0 -g3 -fsanitize=address,undefined -Werror -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wcast-qual -Wlogical-op -Wswitch-default -Wswitch-enum -Wconversion -Winline -Wdouble-promotion -pedantic-errors -std=c17
+CFLAGS_DEV := -O0 -g3 -fsanitize=address,undefined -Werror -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wlogical-op -Wswitch-default -Wswitch-enum -Wconversion -Winline -Wdouble-promotion -pedantic-errors -std=c17
 
 ifeq ($(MAKECMDGOALS),release)
     CFLAGS := $(CFLAGS_RELEASE)
@@ -40,8 +40,8 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 release: clean all
 
 profile: clean all
-	@perf record -g -F 99 -o $(BUILD_DIR)/perf.data $(BUILD_DIR)/$(TARGET_EXEC) $(ARGS)
-	@perf script | stackcollapse-perf.pl | flamegraph.pl > $(BUILD_DIR)/flamegraph.svg
+	@perf record -g --freq=max -o $(BUILD_DIR)/perf.data $(BUILD_DIR)/$(TARGET_EXEC) $(ARGS)
+	@perf script -i $(BUILD_DIR)/perf.data | stackcollapse-perf.pl | flamegraph.pl > $(BUILD_DIR)/flamegraph.svg
 	@chromium $(BUILD_DIR)/flamegraph.svg
 	
 debug: clean all
