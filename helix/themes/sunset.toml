@@ -28,15 +28,26 @@
 "ui.selection"  = { bg = "sel" }
 "ui.highlight"  = { bg = "sel" }
 
+error   = "attn"
+warning = "fire"
+info    = "hope"
+hint    = "dream"
+"diagnostic.error"       = { underline = { color = "attn",  style = "line" } }
+"diagnostic.warning"     = { underline = { color = "fire",  style = "line" } }
+"diagnostic.info"        = { underline = { color = "hope",  style = "line" } }
+"diagnostic.hint"        = { underline = { color = "dream", style = "line" } }
+"diagnostic.unnecessary" = { modifiers = ["dim"] }
+"diagnostic.deprecated"  = { modifiers = ["crossed_out"] }
+
 "type"     = { fg = "fire" } 
 "type.enum" = { fg = "mag" }
-
+function = "dream"
 "string"   = { fg = "grass" }
 "comment"  = { fg = "cmnt", modifiers = ["italic"] }
 
-"constant" = { fg = "mag" }
+"constant" = { fg = "sky" }
 "constant.character" = { fg = "attn" }
-"constant.numeric" = { fg = "mag" }
+"constant.numeric" = { fg = "sky" }
 
 "keyword"  = { fg = "sun" }
 "keyword.directive" = { fg = "cmnt" }
@@ -52,6 +63,9 @@ attn  = "#EE0000"
 
 sun   = "#EEEE00"
 fire  = "#EE7700"
+hope  = "#EE7777"
+sky   = "#7777EE"
+dream = "#FFDDEE"
 grass = "#66CC33"
 
 mag   = "#CC55CC"
