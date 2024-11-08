@@ -1,0 +1,60 @@
+"ui.background" = { fg = "text", bg = "bg" }
+"ui.cursor"     = { modifiers = ["reversed"] }
+"ui.cursor.match"        = { fg = "attn", modifiers = ["bold"] }
+# TODO: ui.debug
+"ui.linenr"     = { fg = "block"}
+"ui.linenr.selected"     = { fg = "cmnt" }
+"ui.statusline" = { bg = "block" }
+"ui.statusline.inactive" = { fg = "cmnt" }
+"ui.statusline.normal"   = { fg = "block", bg = "sun",   modifiers = ["bold"] }
+"ui.statusline.insert"   = { fg = "block", bg = "grass", modifiers = ["bold"] }
+"ui.statusline.select"   = { fg = "block", bg = "fire",  modifiers = ["bold"] }
+"ui.bufferline" = { fg = "cmnt", bg = "block" }
+"ui.bufferline.active"   = { fg = "sun" }
+"ui.popup"      = { fg = "text", bg = "dark" }
+"ui.popup.info" = { fg = "text", bg = "block" }
+"ui.window"     = { fg = "block", modifiers = ["bold"] }
+"ui.help"       = { fg = "text", bg = "block" }
+"ui.text"       = { fg = "text", bg = "bg" }
+"ui.text.focus"          = { fg = "sun" }
+"ui.text.inactive"       = { fg = "cmnt", modifiers = ["italic"] }
+"ui.text.info"           = { bg = "block" }
+"ui.virtual"    = { fg = "block" }
+"ui.virtual.ruler"       = { bg = "block" }
+"ui.virtual.jump-label"  = { fg = "attn", modifiers = ["bold"] }
+"ui.menu"       = { fg = "text", bg = "dark" }
+"ui.menu.selected"       = { bg = "sel" }
+"ui.menu.scroll"         = { fg = "block" }
+"ui.selection"  = { bg = "sel" }
+"ui.highlight"  = { bg = "sel" }
+
+"type"     = { fg = "fire" } 
+"type.enum" = { fg = "mag" }
+
+"string"   = { fg = "grass" }
+"comment"  = { fg = "cmnt", modifiers = ["italic"] }
+
+"constant" = { fg = "mag" }
+"constant.character" = { fg = "attn" }
+"constant.numeric" = { fg = "mag" }
+
+"keyword"  = { fg = "sun" }
+"keyword.directive" = { fg = "cmnt" }
+
+[palette]
+dark  = "#000000"
+bg    = "#111111"
+block = "#222222"
+sel   = "#333333"
+cmnt  = "#777777"
+text  = "#EEEEEE"
+attn  = "#EE0000"
+
+sun   = "#EEEE00"
+fire  = "#EE7700"
+grass = "#66CC33"
+
+mag   = "#CC55CC"
+blue  = "#1155BB"
+op = "#003333"
+# "#007777"
