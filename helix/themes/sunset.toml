@@ -1,19 +1,31 @@
-attribute = "sky"
+attribute = "rose"
 
 type = "rose"
 "type.enum.variant" = "mud"
 
+constructor = "wood"
+
 constant = "fire"
-"constant.numeric" = "wood"
+"constant.character" = "mud"
+"constant.character.escape" = "wine"
+"constant.numeric"   = "wood"
 
 string = "grass"
+"string.regexp"  = "wine"
+"string.special" = "peach"
+"string.special.symbol" = "sky"
 
 comment = { fg = "cmnt", modifiers = ["italic"] }
 
 variable = "text"
+"variable.builtin" = { fg = "sky", modifiers = ["italic"] }
+# TODO: variable.parameter
 "variable.other.member" = "mud"
 
+label = "sky"
+
 punctuation = "cmnt"
+"punctuation.special" = "wine"
 
 keyword = "sun"
 "keyword.directive" = "sky"
@@ -21,10 +33,13 @@ keyword = "sun"
 operator = "wine"
 
 function = "peach"
+"function.macro" = "sky"
 
 tag = "peach"
 
 namespace = { fg = "peach", modifiers = ["italic"] }
+
+special = "sky"
 
 # Ui
 "ui.background" = { fg = "text", bg = "base" }
