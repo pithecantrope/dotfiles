@@ -1,21 +1,28 @@
+# Sunset
+# Author: pithecantrope
+
+# Syntax highlighting
+# ----------------------------------------------------------------
 attribute = "rose"
 
 type = "rose"
-"type.enum.variant" = "mud"
+"type.enum.variant" = { fg = "mud", modifiers = ["italic"] }
 
-constructor = "wood"
+constructor = { fg = "wood", modifiers = ["italic"] }
 
 constant = "fire"
-"constant.character" = "mud"
+"constant.builtin"   = { fg = "fire", modifiers = ["italic"] }
+"constant.character" = "wood"
 "constant.character.escape" = "wine"
 "constant.numeric"   = "wood"
 
 string = "grass"
-"string.regexp"  = "wine"
-"string.special" = "peach"
+"string.regexp"  = { fg = "wine", modifiers = ["italic"] }
+"string.special" = "rose"
 "string.special.symbol" = "sky"
 
 comment = { fg = "cmnt", modifiers = ["italic"] }
+"comment.block.documentation" = "grass"
 
 variable = "text"
 "variable.builtin" = { fg = "sky", modifiers = ["italic"] }
@@ -28,20 +35,25 @@ punctuation = "cmnt"
 "punctuation.special" = "wine"
 
 keyword = "sun"
+"keyword.control.return"    = { fg = "sun", modifiers = ["italic"] }
+"keyword.control.exception" = { fg = "sun", modifiers = ["italic"] }
 "keyword.directive" = "sky"
 
 operator = "wine"
 
 function = "peach"
-"function.macro" = "sky"
+"function.builtin" = { fg = "peach", modifiers = ["italic"] }
+"function.method"  = "wood"
+"function.macro"   = "sky"
 
 tag = "peach"
 
-namespace = { fg = "peach", modifiers = ["italic"] }
+namespace = { fg = "rose", modifiers = ["italic"] }
 
 special = "sky"
 
-# Ui
+# User interface
+# ----------------------------------------------------------------
 "ui.background" = { fg = "text", bg = "base" }
 
 "ui.cursor" = { modifiers = ["reversed"] }
@@ -54,7 +66,7 @@ special = "sky"
 
 "ui.statusline" = { bg = "block" }
 "ui.statusline.inactive" = { fg = "cmnt" }
-"ui.statusline.normal"   = { fg = "block", bg = "fire",  modifiers = ["bold"] }
+"ui.statusline.normal"   = { fg = "block", bg = "sun",  modifiers = ["bold"] }
 "ui.statusline.insert"   = { fg = "block", bg = "grass", modifiers = ["bold"] }
 "ui.statusline.select"   = { fg = "block", bg = "wine",  modifiers = ["bold"] }
 
@@ -86,12 +98,12 @@ special = "sky"
 "ui.highlight" = { bg = "sel" }
 
 error   = "attn"
-warning = "sun"
+warning = "fire"
 info    = "rose"
 hint    = "sky"
 
 "diagnostic.error"   = { underline = { color = "attn", style = "line" } }
-"diagnostic.warning" = { underline = { color = "sun",  style = "line" } }
+"diagnostic.warning" = { underline = { color = "fire",  style = "line" } }
 "diagnostic.info"    = { underline = { color = "rose", style = "line" } }
 "diagnostic.hint"    = { underline = { color = "sky",  style = "line" } }
 "diagnostic.unnecessary" = { modifiers = ["dim"] }
