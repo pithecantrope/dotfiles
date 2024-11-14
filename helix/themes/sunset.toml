@@ -1,58 +1,88 @@
 "ui.background" = { fg = "text", bg = "bg" }
-"ui.cursor"     = { modifiers = ["reversed"] }
-"ui.cursor.match"        = { fg = "attn", modifiers = ["bold"] }
+"ui.cursor" = { modifiers = ["reversed"] }
+"ui.cursor.match" = { fg = "attn", modifiers = ["bold"] }
 # TODO: ui.debug
-"ui.linenr"     = { fg = "block"}
-"ui.linenr.selected"     = { fg = "cmnt" }
+"ui.linenr" = { fg = "block"}
+"ui.linenr.selected" = { fg = "cmnt" }
 "ui.statusline" = { bg = "block" }
 "ui.statusline.inactive" = { fg = "cmnt" }
-"ui.statusline.normal"   = { fg = "block", bg = "sun",   modifiers = ["bold"] }
-"ui.statusline.insert"   = { fg = "block", bg = "grass", modifiers = ["bold"] }
-"ui.statusline.select"   = { fg = "block", bg = "fire",  modifiers = ["bold"] }
+"ui.statusline.normal" = { fg = "block", bg = "sun", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "block", bg = "grass", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "block", bg = "fire", modifiers = ["bold"] }
 "ui.bufferline" = { fg = "cmnt", bg = "block" }
-"ui.bufferline.active"   = { fg = "sun" }
-"ui.popup"      = { fg = "text", bg = "dark" }
+"ui.bufferline.active" = { fg = "sun" }
+"ui.popup" = { fg = "text", bg = "dark" }
 "ui.popup.info" = { fg = "text", bg = "block" }
-"ui.window"     = { fg = "block", modifiers = ["bold"] }
-"ui.help"       = { fg = "text", bg = "block" }
-"ui.text"       = { fg = "text", bg = "bg" }
-"ui.text.focus"          = { fg = "sun" }
-"ui.text.inactive"       = { fg = "cmnt", modifiers = ["italic"] }
-"ui.text.info"           = { bg = "block" }
-"ui.virtual"    = { fg = "block" }
-"ui.virtual.ruler"       = { bg = "block" }
-"ui.virtual.jump-label"  = { fg = "attn", modifiers = ["bold"] }
-"ui.menu"       = { fg = "text", bg = "dark" }
-"ui.menu.selected"       = { bg = "sel" }
-"ui.menu.scroll"         = { fg = "block" }
-"ui.selection"  = { bg = "sel" }
-"ui.highlight"  = { bg = "sel" }
+"ui.window" = { fg = "block", modifiers = ["bold"] }
+"ui.help" = { fg = "text", bg = "block" }
+"ui.text" = { fg = "text", bg = "bg" }
+"ui.text.focus" = { fg = "sun" }
+"ui.text.inactive" = { fg = "cmnt", modifiers = ["italic"] }
+"ui.text.info" = { bg = "block" }
+"ui.virtual" = { fg = "block" }
+"ui.virtual.ruler" = { bg = "block" }
+"ui.virtual.jump-label" = { fg = "attn", modifiers = ["bold"] }
+"ui.menu" = { fg = "text", bg = "dark" }
+"ui.menu.selected" = { bg = "sel" }
+"ui.menu.scroll" = { fg = "block" }
+"ui.selection" = { bg = "sel" }
+"ui.highlight" = { bg = "sel" }
 
-error   = "attn"
+error = "attn"
 warning = "fire"
-info    = "hope"
-hint    = "dream"
-"diagnostic.error"       = { underline = { color = "attn",  style = "line" } }
-"diagnostic.warning"     = { underline = { color = "fire",  style = "line" } }
-"diagnostic.info"        = { underline = { color = "hope",  style = "line" } }
-"diagnostic.hint"        = { underline = { color = "dream", style = "line" } }
+info = "hope"
+hint = "sky"
+"diagnostic.error" = { underline = { color = "attn", style = "line" } }
+"diagnostic.warning" = { underline = { color = "fire", style = "line" } }
+"diagnostic.info" = { underline = { color = "hope", style = "line" } }
+"diagnostic.hint" = { underline = { color = "sky", style = "line" } }
 "diagnostic.unnecessary" = { modifiers = ["dim"] }
-"diagnostic.deprecated"  = { modifiers = ["crossed_out"] }
+"diagnostic.deprecated" = { modifiers = ["crossed_out"] }
 
-"type"     = { fg = "fire" } 
-"type.enum" = { fg = "mag" }
-function = "dream"
-"string"   = { fg = "grass" }
-"comment"  = { fg = "cmnt", modifiers = ["italic"] }
+attribute = "sky"
 
-"constant" = { fg = "sky" }
-"constant.character" = { fg = "attn" }
-"constant.numeric" = { fg = "sky" }
+type = "hope"
+"type.enum.variant" = "mustard"
 
-"keyword"  = { fg = "sun" }
-"keyword.directive" = { fg = "cmnt" }
+constant = "fire"
+"constant.numeric" = "wood"
+
+string = "grass"
+
+comment = { fg = "cmnt", modifiers = ["italic"] }
+
+variable = "text"
+"variable.other.member" = "mustard"
+
+punctuation = "cmnt"
+
+keyword = "sun"
+"keyword.directive" = "sky"
+
+operator = "wine"
+
+function = "peach"
+
+tag = "peach"
+
+namespace = { fg = "peach", modifiers = ["italic"] }
 
 [palette]
+# Reddish
+peach = "#FFCC77"
+hope  = "#EE7777"
+fire  = "#EE7700"
+wood  = "#997755"
+
+# Bluish
+sky  = "#77AAAA"
+wine = "#775599"
+
+# Greenish
+grass   = "#66CC33"
+mustard = "#BBCC77"
+sun     = "#EEEE00"
+
 dark  = "#000000"
 bg    = "#111111"
 block = "#222222"
@@ -60,15 +90,3 @@ sel   = "#333333"
 cmnt  = "#777777"
 text  = "#EEEEEE"
 attn  = "#EE0000"
-
-sun   = "#EEEE00"
-fire  = "#EE7700"
-hope  = "#EE7777"
-sky   = "#7777EE"
-dream = "#FFDDEE"
-grass = "#66CC33"
-
-mag   = "#CC55CC"
-blue  = "#1155BB"
-op = "#003333"
-# "#007777"
