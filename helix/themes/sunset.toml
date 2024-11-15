@@ -100,7 +100,8 @@ special = "sky"
 "ui.bufferline" = { fg = "cmnt", bg = "block" }
 "ui.bufferline.active" = "sun"
 
-"ui.popup" = { fg = "text", bg = "block" }
+"ui.popup" = { fg = "text", bg = "base" }
+"ui.popup.info" = { fg = "text", bg = "block" }
 
 "ui.window" = { fg = "block", modifiers = ["bold"] }
 
