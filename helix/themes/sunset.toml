@@ -6,20 +6,19 @@
 attribute = "rose"
 
 type = "rose"
-"type.enum.variant" = { fg = "mud", modifiers = ["italic"] }
+"type.builtin" = { fg = "rose", modifiers = ["italic"] }
 
-constructor = { fg = "wood", modifiers = ["italic"] }
+constructor = "wood"
 
 constant = "fire"
 "constant.builtin"   = { fg = "fire", modifiers = ["italic"] }
 "constant.character" = "wood"
-"constant.character.escape" = "wine"
+"constant.character.escape" = "pink"
 "constant.numeric"   = "wood"
 
 string = "grass"
-"string.regexp"  = { fg = "wine", modifiers = ["italic"] }
-"string.special" = "rose"
-"string.special.symbol" = "sky"
+"string.regexp"  = "pink"
+"string.special" = "fire"
 
 comment = { fg = "cmnt", modifiers = ["italic"] }
 "comment.block.documentation" = "grass"
@@ -43,14 +42,34 @@ operator = "wine"
 
 function = "peach"
 "function.builtin" = { fg = "peach", modifiers = ["italic"] }
-"function.method"  = "wood"
-"function.macro"   = "sky"
+"function.macro"   = "pink"
 
 tag = "peach"
 
-namespace = { fg = "rose", modifiers = ["italic"] }
+namespace = { fg = "pink", modifiers = ["italic"] }
 
 special = "sky"
+
+# Editor interface
+# ----------------------------------------------------------------
+# TODO: markup
+# "markup.heading.marker" = { fg = "peach", modifiers = ["bold"] }
+# "markup.heading.1" = "lavender"
+# "markup.heading.2" = "mauve"
+# "markup.heading.3" = "green"
+# "markup.heading.4" = "yellow"
+# "markup.heading.5" = "pink"
+# "markup.heading.6" = "teal"
+# "markup.list" = "mauve"
+# "markup.bold" = { modifiers = ["bold"] }
+# "markup.italic" = { modifiers = ["italic"] }
+# "markup.link.url" = { fg = "blue", modifiers = ["italic", "underlined"] }
+# "markup.link.text" = "blue"
+# "markup.raw" = "flamingo"
+
+"diff.plus"  = "grass"
+"diff.minus" = "attn"
+"diff.delta" = "sky"
 
 # User interface
 # ----------------------------------------------------------------
@@ -99,12 +118,12 @@ special = "sky"
 
 error   = "attn"
 warning = "fire"
-info    = "rose"
+info    = "pink"
 hint    = "sky"
 
 "diagnostic.error"   = { underline = { color = "attn", style = "line" } }
-"diagnostic.warning" = { underline = { color = "fire",  style = "line" } }
-"diagnostic.info"    = { underline = { color = "rose", style = "line" } }
+"diagnostic.warning" = { underline = { color = "fire", style = "line" } }
+"diagnostic.info"    = { underline = { color = "pink", style = "line" } }
 "diagnostic.hint"    = { underline = { color = "sky",  style = "line" } }
 "diagnostic.unnecessary" = { modifiers = ["dim"] }
 "diagnostic.deprecated"  = { modifiers = ["crossed_out"] }
@@ -114,16 +133,17 @@ hint    = "sky"
 fire  = "#EE7711"
 rose  = "#EE7777"
 peach = "#EEBB77"
+pink  = "#EEAAAA"
 wood  = "#997755"
-
-# Bluish
-sky  = "#77AAAA"
-wine = "#775599"
 
 # Greenish
 grass = "#66CC33"
 mud   = "#BBCC77"
 sun   = "#EEEE11"
+
+# Bluish
+sky  = "#77AAAA"
+wine = "#775599"
 
 # Ui
 base  = "#111111"
