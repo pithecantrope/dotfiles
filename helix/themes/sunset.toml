@@ -18,7 +18,8 @@ constant = "fire"
 
 string = "grass"
 "string.regexp"  = "pink"
-"string.special" = "fire"
+"string.special" = "rose"
+"string.special.symbol" = "fire"
 
 comment = { fg = "cmnt", modifiers = ["italic"] }
 "comment.block.documentation" = "grass"
@@ -52,20 +53,27 @@ special = "sky"
 
 # Editor interface
 # ----------------------------------------------------------------
-# TODO: markup
-# "markup.heading.marker" = { fg = "peach", modifiers = ["bold"] }
-# "markup.heading.1" = "lavender"
-# "markup.heading.2" = "mauve"
-# "markup.heading.3" = "green"
-# "markup.heading.4" = "yellow"
-# "markup.heading.5" = "pink"
-# "markup.heading.6" = "teal"
-# "markup.list" = "mauve"
-# "markup.bold" = { modifiers = ["bold"] }
-# "markup.italic" = { modifiers = ["italic"] }
-# "markup.link.url" = { fg = "blue", modifiers = ["italic", "underlined"] }
-# "markup.link.text" = "blue"
-# "markup.raw" = "flamingo"
+"markup.heading.marker" = "sun"
+"markup.heading.1" = "attn"
+"markup.heading.2" = "fire"
+"markup.heading.3" = "rose"
+"markup.heading.4" = "peach"
+"markup.heading.5" = "wine"
+"markup.heading.6" = "grass"
+
+"markup.list" = "wood"
+
+"markup.bold"          = { modifiers = ["bold"] }
+"markup.italic"        = { modifiers = ["italic"] }
+"markup.strikethrough" = { modifiers = ["crossed_out"] }
+
+"markup.link.url"   = { fg = "sky", underline.style = "line" }
+"markup.link.label" = { fg = "sky", modifiers = ["italic"] }
+"markup.link.text"  = "mud"
+
+"markup.quote" = "grass"
+
+"markup.raw"   = "pink"
 
 "diff.plus"  = "grass"
 "diff.minus" = "attn"
@@ -121,10 +129,10 @@ warning = "fire"
 info    = "pink"
 hint    = "sky"
 
-"diagnostic.error"   = { underline = { color = "attn", style = "line" } }
-"diagnostic.warning" = { underline = { color = "fire", style = "line" } }
-"diagnostic.info"    = { underline = { color = "pink", style = "line" } }
-"diagnostic.hint"    = { underline = { color = "sky",  style = "line" } }
+"diagnostic.error"   = { fg = "attn", underline.style = "line" }
+"diagnostic.warning" = { fg = "fire", underline.style = "line" }
+"diagnostic.info"    = { fg = "pink", underline.style = "line" }
+"diagnostic.hint"    = { fg = "sky",  underline.style = "line" }
 "diagnostic.unnecessary" = { modifiers = ["dim"] }
 "diagnostic.deprecated"  = { modifiers = ["crossed_out"] }
 
