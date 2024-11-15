@@ -1,10 +1,13 @@
-theme = "gruber-darker"
+theme = "sunset"
 
 [editor]
 gutters = ["diagnostics", "diff"]
 auto-completion = false
 auto-format = false
 popup-border = "all"
+
+[editor.indent-guides]
+render = true
 
 [keys.normal]
 "C-[" = ["keep_primary_selection", "collapse_selection"]

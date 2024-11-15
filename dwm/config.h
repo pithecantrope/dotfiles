@@ -7,10 +7,10 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Cascadia Mono:style=Bold:size=15" };
 static const char dmenufont[]       = "Cascadia Mono:style=Bold:size=15";
-static const char black[]           = "#000000";
-static const char white[]           = "#ffffff";
-static const char gray[]            = "#808080";
-static const char blue[]            = "#0000ff";
+static const char black[]           = "#111111";
+static const char white[]           = "#eeeeee";
+static const char gray[]            = "#333333";
+static const char blue[]            = "#77AAAA";
 static const char *colors[][3]      = {
 	/*               fg      bg     border   */
 	[SchemeNorm] = { white,  black, gray },
@@ -63,7 +63,7 @@ static const char *brightness_dec[] = { "brightnessctl", "set", "10%-", NULL };
 static const char *brightness_inc[] = { "brightnessctl", "set", "10%+", NULL };
 static const char *volume_dec[] = { "wpctl", "set-volume",  "@DEFAULT_SINK@", "10%-", NULL };
 static const char *volume_inc[] = { "wpctl", "set-volume",  "@DEFAULT_SINK@", "10%+", NULL };
-static const char *screenshot_full[]   = { "scrot", NULL };
+static const char *screenshot_full[]   = { "scrot", "-u",  NULL };
 static const char *screenshot_region[] = { "scrot", "-s", NULL };
 static const char *lock_screen[]  = { "slock", NULL };
 
