@@ -6,7 +6,7 @@ SRC_DIR := ./src
 CC := gcc
 CPPFLAGS := -MMD -MP
 
-CFLAGS_RELEASE := -O3 -flto=auto
+CFLAGS_RELEASE := -O3 -flto=auto -DNDEBUG
 CFLAGS_PROFILE := -O3 -flto=auto -g
 CFLAGS_DEBUG := -O0 -ggdb3
 CFLAGS_DEV := -O0 -g3 -fsanitize=address,undefined -Werror -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wlogical-op -Wswitch-default -Wswitch-enum -Wconversion -Winline -Wdouble-promotion -pedantic-errors -std=c17
@@ -19,22 +19,23 @@ else ifeq ($(MAKECMDGOALS),debug)
     CFLAGS := $(CFLAGS_DEBUG)
 else
     CFLAGS := $(CFLAGS_DEV)
-	LDFLAGS += -lasan -lubsan
 endif
 
 SRCS := $(wildcard $(SRC_DIR)/*.c)
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
-.PHONY: all release profile debug run clean compile_commands
+.PHONY: all release profile debug run clean clang
 
 all: $(BUILD_DIR)/$(TARGET_EXEC)
+
+$(BUILD_DIR):
+	@mkdir -p $@
 
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 	@$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 release: clean all
@@ -45,7 +46,7 @@ profile: clean all
 	@chromium $(BUILD_DIR)/flamegraph.svg
 	
 debug: clean all
-	@gdbgui $(BUILD_DIR)/$(TARGET_EXEC)
+	@gdbgui '$(BUILD_DIR)/$(TARGET_EXEC) $(ARGS)'
 
 run:
 	@$(BUILD_DIR)/$(TARGET_EXEC) $(ARGS)
@@ -53,7 +54,7 @@ run:
 clean:
 	@rm -rf $(BUILD_DIR)
 
-compile_commands: clean
+clang: clean
 	@bear -- make
 
 -include $(DEPS)
