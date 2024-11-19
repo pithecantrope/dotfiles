@@ -1,22 +1,21 @@
 theme = "sunset"
 
 [editor]
-gutters = ["diagnostics", "diff"]
+gutters         = ["diagnostics", "diff"]
 auto-completion = false
-auto-format = false
-popup-border = "all"
-
-[editor.indent-guides]
-render = true
+auto-format     = false
+popup-border    = "all"
 
 [keys.normal]
 "C-[" = ["keep_primary_selection", "collapse_selection"]
-"C-c" = ["save_selection", "extend_to_line_bounds", "yank_to_primary_clipboard", "paste_primary_clipboard_before", "jump_backward"]
-X = "extend_line_above"
+"C-c" = ["save_selection", "extend_to_line_bounds", "yank_to_primary_clipboard",
+         "paste_primary_clipboard_before", "jump_backward"]
+"X"   = "extend_line_above"
 
 [keys.insert]
 "C-[" = "normal_mode"
-"C-c" = ["normal_mode", "save_selection", "extend_to_line_bounds", "yank_to_primary_clipboard", "paste_primary_clipboard_before", "jump_backward", "insert_mode"]
+"C-c" = ["normal_mode", "save_selection", "extend_to_line_bounds", "yank_to_primary_clipboard",
+         "paste_primary_clipboard_before", "jump_backward", "insert_mode"]
 
 [keys.select]
 "C-[" = ["normal_mode", "keep_primary_selection", "collapse_selection"]
