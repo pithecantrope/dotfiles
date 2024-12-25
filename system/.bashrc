@@ -40,3 +40,7 @@ function new() {
     [[ ! -e "${HOME}/projects/dotfiles/system/samples/${1}" ]] && echo "No sample for '${1}'" && return
     cp   -r "${HOME}/projects/dotfiles/system/samples/${1}" . ;  mv "${1}" "${2}" ; cd "${2}" ; $EDITOR .
 }
+
+function yt() {
+    chromium --proxy-server="socks://0.0.0.0:1080"
+}

@@ -1,3 +1,4 @@
-set show-all-if-ambiguous on
-set colored-stats On
 set colored-completion-prefix On
+set colored-stats On
+set completion-ignore-case On
+set show-all-if-ambiguous On

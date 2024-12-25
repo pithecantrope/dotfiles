@@ -1,3 +1,5 @@
+#!/bin/sh
+
 while true; do
 	if [ -f /sys/class/power_supply/BAT0/capacity ]; then
 		capacity=$(< /sys/class/power_supply/BAT0/capacity)%
@@ -12,6 +14,7 @@ done &
 
 setxkbmap -layout us,ru -option grp:alt_caps_toggle &
 unclutter --timeout 1 --start-hidden &
+ciadpi --disorder 1 &
 
 st &
 chromium &
