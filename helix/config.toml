@@ -1,10 +1,9 @@
 theme = "sunset"
 
 [editor]
-gutters         = ["diagnostics", "diff"]
-auto-completion = false
-auto-format     = false
-popup-border    = "all"
+gutters      = ["diagnostics", "spacer", "diff"]
+auto-format  = false
+popup-border = "all"
 
 [keys.normal]
 "C-[" = ["keep_primary_selection", "collapse_selection"]
