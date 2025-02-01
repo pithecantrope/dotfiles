@@ -13,7 +13,7 @@ TARGET := $(PROJECT_NAME)-$(CONFIG)
 
 CFLAGS_RELEASE := -O3 -flto=auto -DNDEBUG
 CFLAGS_DEBUG := -O0 -ggdb3
-CFLAGS_PROFILE := -O3 -flto=auto -g
+CFLAGS_PROFILE := -O2 -fno-inline -fno-omit-frame-pointer -g3
 CFLAGS_DEV := -std=c17 -O0 -g3 -fsanitize=address,undefined -Werror -Wall -Wextra \
 			  -pedantic-errors -Wlogical-op -Wconversion -Winline -Wundef -Wshadow \
 			  -Wswitch-default -Wdouble-promotion -Wfloat-equal -Wswitch-enum  
@@ -24,7 +24,7 @@ OBJS := $(SRCS:$(SRC_DIR)/%.c=$(TARGET_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
 .SILENT:
-.PHONY: all release debug profile run gdb _gdb perf _perf clean compile
+.PHONY: all release _release debug _debug perf _perf cache _cache call _call mem _mem run clean compile
 
 all: $(TARGET_DIR)/$(TARGET)
 
@@ -39,30 +39,57 @@ $(TARGET_DIR)/%.o: $(SRC_DIR)/%.c | $(TARGET_DIR)
 
 release:
 	$(MAKE) -s CONFIG=RELEASE
+	$(MAKE) -s CONFIG=RELEASE _release
+
+_release:
+	$(TARGET_DIR)/$(TARGET) $(ARGS)
 
 debug:
 	$(MAKE) -s CONFIG=DEBUG
+	$(MAKE) -s CONFIG=DEBUG _debug
 
-profile:
-	$(MAKE) -s CONFIG=PROFILE
-
-run: $(TARGET_DIR)/$(TARGET)
-	$^ $(ARGS)
-
-gdb:
-	$(MAKE) -s CONFIG=DEBUG _gdb
-
-_gdb:
+_debug:
 	gdb -q -ex 'break main' --tui --args $(TARGET_DIR)/$(TARGET) $(ARGS)
 
 perf:
+	$(MAKE) -s CONFIG=PROFILE
 	$(MAKE) -s CONFIG=PROFILE _perf
- 
+
 _perf:
 	perf record -g --freq=max -o $(TARGET_DIR)/perf.data $(TARGET_DIR)/$(TARGET) $(ARGS)
 	perf script -i $(TARGET_DIR)/perf.data | stackcollapse-perf.pl | flamegraph.pl > $(TARGET_DIR)/flamegraph.svg
 	$(BROWSER) $(TARGET_DIR)/flamegraph.svg
-	
+
+cache:
+	$(MAKE) -s CONFIG=PROFILE
+	$(MAKE) -s CONFIG=PROFILE _cache
+
+_cache:
+	valgrind -q --tool=cachegrind --cachegrind-out-file=$(TARGET_DIR)/cache.out $(TARGET_DIR)/$(TARGET) $(ARGS)
+	cg_annotate $(TARGET_DIR)/cache.out > $(TARGET_DIR)/cache.txt
+	$(EDITOR) $(TARGET_DIR)/cache.txt
+
+call:
+	$(MAKE) -s CONFIG=PROFILE
+	$(MAKE) -s CONFIG=PROFILE _call
+
+_call:
+	valgrind -q --tool=callgrind --callgrind-out-file=$(TARGET_DIR)/call.out $(TARGET_DIR)/$(TARGET) $(ARGS)
+	callgrind_annotate $(TARGET_DIR)/call.out > $(TARGET_DIR)/call.txt
+	$(EDITOR) $(TARGET_DIR)/call.txt
+
+mem:
+	$(MAKE) -s CONFIG=PROFILE
+	$(MAKE) -s CONFIG=PROFILE _mem
+
+_mem:
+	valgrind -q --tool=massif --massif-out-file=$(TARGET_DIR)/mem.out $(TARGET_DIR)/$(TARGET) $(ARGS)
+	ms_print $(TARGET_DIR)/mem.out > $(TARGET_DIR)/mem.txt
+	$(EDITOR) $(TARGET_DIR)/mem.txt
+
+run: $(TARGET_DIR)/$(TARGET)
+	$^ $(ARGS)
+
 clean:
 	rm -rf $(BUILD_DIR)
 
