@@ -2,8 +2,9 @@ theme = "sunset"
 
 [editor]
 gutters      = ["diagnostics", "spacer", "diff"]
-auto-format  = false
+bufferline   = "always"
 popup-border = "all"
+auto-format  = false
 
 [keys.normal]
 "C-[" = ["keep_primary_selection", "collapse_selection"]
