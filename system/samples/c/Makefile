@@ -11,7 +11,7 @@ CPPFLAGS := -MMD -MP
 TARGET_DIR := $(BUILD_DIR)/$(CONFIG)
 TARGET := $(PROJECT_NAME)-$(CONFIG)
 
-CFLAGS_RELEASE := -O3 -flto=auto -DNDEBUG
+CFLAGS_RELEASE := -O3 -flto=auto
 CFLAGS_DEBUG := -O0 -ggdb3
 CFLAGS_PROFILE := -O2 -fno-inline -fno-omit-frame-pointer -g3
 CFLAGS_DEV := -std=c17 -O0 -g3 -fsanitize=address,undefined -Werror -Wall -Wextra \

@@ -1,5 +1,6 @@
-#include <stdint.h>
+#include <float.h>
 #include <stddef.h>
+#include <stdint.h>
 
 typedef int8_t    i8;
 typedef uint8_t   u8;
@@ -15,5 +16,13 @@ typedef ptrdiff_t isize;
 typedef size_t    usize;
 #define USIZE_MAX SIZE_MAX
 typedef float     f32;
+#define F32_MIN   FLT_MIN
+#define F32_MIN   FLT_MIN
 typedef double    f64;
+#define F64_MAX   DBL_MAX
+#define F64_MAX   DBL_MAX
 typedef char      byte;
+
+#define assert(c)   while (!(c)) __builtin_unreachable()
+#define countof(xs) (sizeof(xs) / sizeof((xs)[0]))
+#define lengthof(s) (countof(s) - 1)
