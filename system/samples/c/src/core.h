@@ -1,6 +1,9 @@
 #include <float.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef int8_t    i8;
 typedef uint8_t   u8;
@@ -22,7 +25,28 @@ typedef double    f64;
 #define F64_MAX   DBL_MAX
 #define F64_MAX   DBL_MAX
 typedef char      byte;
+typedef struct {
+        const u8* data;
+        isize len;
+} s8;
+#define s8(s) (s8){.data = (const u8*)s, .len = sizeof(s) - 1}
 
 #define assert(c)   while (!(c)) __builtin_unreachable()
-#define countof(xs) (sizeof(xs) / sizeof((xs)[0]))
-#define lengthof(s) (countof(s) - 1)
+#define label(name) __asm__ volatile (#name ":\n\tnop")
+#define countof(xs) (sizeof(xs) / sizeof(0[xs]))
+#define container_of(ptr, type, member) ((type*)((byte*)(ptr) - offsetof(type, member)))
+#define PTR [static 1]
+#define INLINE static inline
+
+INLINE i32
+s8cmp(const s8 a PTR, const s8 b PTR) {
+        if (a->len != b->len) {
+                return a->len < b->len ? -1 : 1;
+        }
+        return memcmp(a->data, b->data, (size_t)a->len);
+}
+
+INLINE bool
+s8equals(const s8 a PTR, const s8 b PTR) {
+        return a->len == b->len && memcmp(a->data, b->data, (size_t)a->len) == 0;
+}

@@ -1,11 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "core.h"
 
 int
 main(int argc, char* argv[]) {
-    (void)argc;
-    (void)argv;
-    printf("Hello World!\n");
+        (void)argc;
+        (void)argv;
 
-    return EXIT_SUCCESS;
+        return EXIT_SUCCESS;
 }
