@@ -153,3 +153,41 @@ INLINE bool
 s8ieq(const s8 s1 PTR, const s8 s2 PTR) {
         return s8icmp(s1, s2) == 0;
 }
+
+INLINE bool
+s8starts_with(const s8 s PTR, const s8 prefix PTR) {
+        return (s->len >= prefix->len) && memcmp(s->data, prefix->data, (size_t)prefix->len) == 0;
+}
+
+INLINE bool
+s8ends_with(const s8 s PTR, const s8 suffix PTR) {
+        return (s->len >= suffix->len) &&
+               memcmp(s->data + (s->len - suffix->len), suffix->data, (size_t)suffix->len) == 0;
+}
+
+INLINE bool
+s8istarts_with(const s8 s PTR, const s8 prefix PTR) {
+        if (s->len < prefix->len) {
+                return false;
+        }
+        for (isize i = 0; i < prefix->len; ++i) {
+                if (u8to_lower(s->data[i]) != u8to_lower(prefix->data[i])) {
+                        return false;
+                }
+        }
+        return true;
+}
+
+INLINE bool
+s8iends_with(const s8 s PTR, const s8 suffix PTR) {
+        if (s->len < suffix->len) {
+                return false;
+        }
+        for (isize i = 0; i < suffix->len; ++i) {
+                if (u8to_lower(s->data[i + (s->len - suffix->len)]) !=
+                    u8to_lower(suffix->data[i])) {
+                        return false;
+                }
+        }
+        return true;
+}
