@@ -35,23 +35,24 @@ typedef struct {
 #define label(name) __asm__ volatile (#name ":\n\tnop")
 #define countof(xs) (sizeof(xs) / sizeof(0[xs]))
 #define container_of(ptr, type, member) ((type*)((byte*)(ptr) - offsetof(type, member)))
+#define in_range(min, value, max) ((min) <= (value) && (value) <= (max))
 #define PTR [static 1]
 #define INLINE static inline
 
 // u8 ----------------------------------------------------------------------------------------------
 INLINE bool
 u8is_digit(u8 c) {
-        return '0' <= c && c <= '9';
+        return in_range('0', c, '9');
 }
 
 INLINE bool
 u8is_upper(u8 c) {
-        return 'A' <= c && c <= 'Z';
+        return in_range('A', c, 'Z');
 }
 
 INLINE bool
 u8is_lower(u8 c) {
-        return 'a' <= c && c <= 'z';
+        return in_range('a', c, 'z');
 }
 
 INLINE bool
@@ -66,7 +67,7 @@ u8is_alnum(u8 c) {
 
 INLINE bool
 u8is_xdigit(u8 c) {
-  return u8is_digit(c) || ('A' <= c && c <= 'F') || ('a' <= c && c <= 'f');
+  return u8is_digit(c) || in_range('A', c, 'F') || in_range('a', c, 'f');
 }
 
 INLINE bool
@@ -104,6 +105,21 @@ u8is_punct(u8 c) {
         return u8is_graph(c) && !u8is_alnum(c);
 }
 
+INLINE u8
+u8to_upper(u8 c) {
+        return in_range('a', c, 'z') ? c - ('a' - 'A') : c;
+}
+
+INLINE u8
+u8to_lower(u8 c) {
+        return in_range('A', c, 'Z') ? c + ('a' - 'A') : c;
+}
+
+INLINE u8
+u8to_ascii(u8 c) {
+        return c & 127;
+}
+
 // s8 ----------------------------------------------------------------------------------------------
 INLINE i32
 s8cmp(const s8 a PTR, const s8 b PTR) {
@@ -125,7 +141,7 @@ s8eq(const s8 a PTR, const s8 b PTR) {
 //         return 0;
 // }
 
-// INLINE i32
+// INLINE bool
 // s8ieq(const s8 a PTR, const s8 b PTR) {
 //         return s8icmp(a, b) == 0;
 // }
