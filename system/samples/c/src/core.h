@@ -56,6 +56,16 @@ u8is_lower(u8 c) {
 }
 
 INLINE bool
+u8is_print(u8 c) {
+        return in_range(' ', c, '~');
+}
+
+INLINE bool
+u8is_graph(u8 c) {
+        return in_range(' ' + 1, c, '~');
+}
+
+INLINE bool
 u8is_alpha(u8 c) {
         return u8is_upper(c) || u8is_lower(c);
 }
@@ -87,17 +97,7 @@ u8is_ascii(u8 c) {
 
 INLINE bool
 u8is_cntrl(u8 c) {
-        return c <= 31 || c == 127;
-}
-
-INLINE bool
-u8is_print(u8 c) {
-        return 32 <= c && c <= 126;
-}
-
-INLINE bool
-u8is_graph(u8 c) {
-        return 33 <= c && c <= 126;
+        return c < ' ' || c == 127;
 }
 
 INLINE bool
@@ -122,26 +122,34 @@ u8to_ascii(u8 c) {
 
 // s8 ----------------------------------------------------------------------------------------------
 INLINE i32
-s8cmp(const s8 a PTR, const s8 b PTR) {
-        if (a->len != b->len) {
-                return a->len < b->len ? -1 : 1;
+s8cmp(const s8 s1 PTR, const s8 s2 PTR) {
+        if (s1->len != s2->len) {
+                return s1->len < s2->len ? -1 : 1;
         }
-        return memcmp(a->data, b->data, (size_t)a->len);
+        return memcmp(s1->data, s2->data, (size_t)s1->len);
 }
 
 INLINE bool
-s8eq(const s8 a PTR, const s8 b PTR) {
-        return s8cmp(a, b) == 0;
+s8eq(const s8 s1 PTR, const s8 s2 PTR) {
+        return s8cmp(s1, s2) == 0;
 }
 
-// INLINE i32
-// s8icmp(const s8 a PTR, const s8 b PTR) {
-//         (void)a;
-//         (void)b;
-//         return 0;
-// }
+INLINE i32
+s8icmp(const s8 s1 PTR, const s8 s2 PTR) {
+        if (s1->len != s2->len) {
+                return s1->len < s2->len ? -1 : 1;
+        }
+        for (isize i = 0; i < s1->len; ++i) {
+                u8 c1 = u8to_lower(s1->data[i]);
+                u8 c2 = u8to_lower(s2->data[i]);
+                if (c1 != c2) {
+                        return c1 < c2 ? -1 : 1;
+                }
+        }
+        return 0;
+}
 
-// INLINE bool
-// s8ieq(const s8 a PTR, const s8 b PTR) {
-//         return s8icmp(a, b) == 0;
-// }
+INLINE bool
+s8ieq(const s8 s1 PTR, const s8 s2 PTR) {
+        return s8icmp(s1, s2) == 0;
+}
