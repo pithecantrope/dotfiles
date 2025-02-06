@@ -37,6 +37,9 @@ typedef char      byte;
 // Arena -------------------------------------------------------------------------------------------
 
 // u8 ----------------------------------------------------------------------------------------------
+#define U8SIZE 8
+#define U8ALPHABET 256
+
 INLINE bool
 u8is_digit(u8 c) {
         return in_range('0', c, '9');
@@ -148,4 +151,44 @@ INLINE bool
 s8ends_with(const s8 s PTR, const s8 suffix PTR) {
         return (s->len >= suffix->len) &&
                memcmp(s->data + (s->len - suffix->len), suffix->data, (size_t)suffix->len) == 0;
+}
+
+INLINE isize
+s8find(const s8 s PTR, const s8 sub PTR) {
+        if (sub->len == 0 || s->len < sub->len) return -1;
+        isize last_occ[256];
+        memset(last_occ, -1, 8 * 256);
+        for (isize i = 0; i < sub->len - 1; ++i) {
+                last_occ[sub->data[i]] = i;
+        }        
+
+        for (isize i = 0; i <= s->len - sub->len;) {
+                for (isize j = sub->len - 1; sub->data[j] == s->data[j + i];) {
+                        if (--j == -1) return i;
+                }
+                i += sub->len - 1 - last_occ[s->data[i + sub->len - 1]];
+        }
+        return -1;
+}
+
+INLINE isize
+s8count(const s8 s PTR, const s8 sub PTR) {
+        if (sub->len == 0 || s->len < sub->len) return 0;
+        isize count = 0;
+        isize last_occ[256];
+        memset(last_occ, -1, 8 * 256);
+        for (isize i = 0; i < sub->len - 1; ++i) {
+                last_occ[sub->data[i]] = i;
+        }        
+
+        for (isize i = 0; i <= s->len - sub->len;) {
+                for (isize j = sub->len - 1; sub->data[j] == s->data[j + i];) {
+                        if (--j == -1) {
+                                ++count;
+                                break;
+                        }
+                }
+                i += sub->len - 1 - last_occ[s->data[i + sub->len - 1]];
+        }
+        return count;
 }
