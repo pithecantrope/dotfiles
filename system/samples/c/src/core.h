@@ -25,11 +25,6 @@ typedef double    f64;
 #define F64_MAX   DBL_MAX
 #define F64_MAX   DBL_MAX
 typedef char      byte;
-typedef struct {
-        const u8* data;
-        isize len;
-} s8;
-#define s8(s) (s8){.data = (const u8*)s, .len = sizeof(s) - 1}
 
 #define assert(c)   while (!(c)) __builtin_unreachable()
 #define label(name) __asm__ volatile (#name ":\n\tnop")
@@ -38,6 +33,8 @@ typedef struct {
 #define in_range(min, value, max) ((min) <= (value) && (value) <= (max))
 #define PTR [static 1]
 #define INLINE static inline
+
+// Arena -------------------------------------------------------------------------------------------
 
 // u8 ----------------------------------------------------------------------------------------------
 INLINE bool
@@ -121,6 +118,14 @@ u8to_ascii(u8 c) {
 }
 
 // s8 ----------------------------------------------------------------------------------------------
+typedef struct {
+        u8* data;
+        isize len;
+} s8;
+#define s8(s) (s8){.data = (u8*)s, .len = (isize)(sizeof(s) - 1)}
+// #define s8(s) (s8){.data = (u8*)s, .len = (isize)(strlen(s))}
+// TODO: _Generic (from FILE*, itself(copy))
+
 INLINE i32
 s8cmp(const s8 s1 PTR, const s8 s2 PTR) {
         if (s1->len != s2->len) {
@@ -134,26 +139,6 @@ s8eq(const s8 s1 PTR, const s8 s2 PTR) {
         return s8cmp(s1, s2) == 0;
 }
 
-INLINE i32
-s8icmp(const s8 s1 PTR, const s8 s2 PTR) {
-        if (s1->len != s2->len) {
-                return s1->len < s2->len ? -1 : 1;
-        }
-        for (isize i = 0; i < s1->len; ++i) {
-                u8 c1 = u8to_lower(s1->data[i]);
-                u8 c2 = u8to_lower(s2->data[i]);
-                if (c1 != c2) {
-                        return c1 < c2 ? -1 : 1;
-                }
-        }
-        return 0;
-}
-
-INLINE bool
-s8ieq(const s8 s1 PTR, const s8 s2 PTR) {
-        return s8icmp(s1, s2) == 0;
-}
-
 INLINE bool
 s8starts_with(const s8 s PTR, const s8 prefix PTR) {
         return (s->len >= prefix->len) && memcmp(s->data, prefix->data, (size_t)prefix->len) == 0;
@@ -163,31 +148,4 @@ INLINE bool
 s8ends_with(const s8 s PTR, const s8 suffix PTR) {
         return (s->len >= suffix->len) &&
                memcmp(s->data + (s->len - suffix->len), suffix->data, (size_t)suffix->len) == 0;
-}
-
-INLINE bool
-s8istarts_with(const s8 s PTR, const s8 prefix PTR) {
-        if (s->len < prefix->len) {
-                return false;
-        }
-        for (isize i = 0; i < prefix->len; ++i) {
-                if (u8to_lower(s->data[i]) != u8to_lower(prefix->data[i])) {
-                        return false;
-                }
-        }
-        return true;
-}
-
-INLINE bool
-s8iends_with(const s8 s PTR, const s8 suffix PTR) {
-        if (s->len < suffix->len) {
-                return false;
-        }
-        for (isize i = 0; i < suffix->len; ++i) {
-                if (u8to_lower(s->data[i + (s->len - suffix->len)]) !=
-                    u8to_lower(suffix->data[i])) {
-                        return false;
-                }
-        }
-        return true;
 }
