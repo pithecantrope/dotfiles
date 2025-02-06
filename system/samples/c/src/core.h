@@ -40,85 +40,22 @@ typedef char      byte;
 #define U8SIZE 8
 #define U8ALPHABET 256
 
-INLINE bool
-u8is_digit(u8 c) {
-        return in_range('0', c, '9');
-}
-
-INLINE bool
-u8is_upper(u8 c) {
-        return in_range('A', c, 'Z');
-}
-
-INLINE bool
-u8is_lower(u8 c) {
-        return in_range('a', c, 'z');
-}
-
-INLINE bool
-u8is_print(u8 c) {
-        return in_range(' ', c, '~');
-}
-
-INLINE bool
-u8is_graph(u8 c) {
-        return in_range(' ' + 1, c, '~');
-}
-
-INLINE bool
-u8is_alpha(u8 c) {
-        return u8is_upper(c) || u8is_lower(c);
-}
-
-INLINE bool
-u8is_alnum(u8 c) {
-        return u8is_digit(c) || u8is_alpha(c);
-}
-
-INLINE bool
-u8is_xdigit(u8 c) {
-  return u8is_digit(c) || in_range('A', c, 'F') || in_range('a', c, 'f');
-}
-
-INLINE bool
-u8is_blank(u8 c) {
-        return c == ' ' || c == '\t';
-}
-
-INLINE bool
-u8is_space(u8 c) {
-        return u8is_blank(c) || c == '\r' || c == '\n' || c == '\f' || c == '\v';
-}
-
-INLINE bool
-u8is_ascii(u8 c) {
-        return c <= 127;
-}
-
-INLINE bool
-u8is_cntrl(u8 c) {
-        return c < ' ' || c == 127;
-}
-
-INLINE bool
-u8is_punct(u8 c) {
-        return u8is_graph(c) && !u8is_alnum(c);
-}
-
-INLINE u8
-u8to_upper(u8 c) {
-        return in_range('a', c, 'z') ? c - ('a' - 'A') : c;
-}
-
-INLINE u8
-u8to_lower(u8 c) {
-        return in_range('A', c, 'Z') ? c + ('a' - 'A') : c;
-}
-
-INLINE u8
-u8to_ascii(u8 c) {
-        return c & 127;
-}
+INLINE bool u8is_digit (u8 c) { return in_range('0', c, '9'); }
+INLINE bool u8is_upper (u8 c) { return in_range('A', c, 'Z'); }
+INLINE bool u8is_lower (u8 c) { return in_range('a', c, 'z'); }
+INLINE bool u8is_print (u8 c) { return in_range(' ', c, '~'); }
+INLINE bool u8is_graph (u8 c) { return in_range(' ' + 1, c, '~'); }
+INLINE bool u8is_alpha (u8 c) { return u8is_upper(c) || u8is_lower(c); }
+INLINE bool u8is_alnum (u8 c) { return u8is_digit(c) || u8is_alpha(c); }
+INLINE bool u8is_xdigit(u8 c) { return u8is_digit(c) || in_range('A', c, 'F') || in_range('a', c, 'f'); }
+INLINE bool u8is_blank (u8 c) { return c == ' ' || c == '\t'; }
+INLINE bool u8is_space (u8 c) { return u8is_blank(c) || c == '\r' || c == '\n' || c == '\f' || c == '\v'; }
+INLINE bool u8is_ascii (u8 c) { return c <= 127; }
+INLINE bool u8is_cntrl (u8 c) { return c < ' ' || c == 127; }
+INLINE bool u8is_punct (u8 c) { return u8is_graph(c) && !u8is_alnum(c); }
+INLINE u8   u8to_upper (u8 c) { return in_range('a', c, 'z') ? c - ('a' - 'A') : c; }
+INLINE u8   u8to_lower (u8 c) { return in_range('A', c, 'Z') ? c + ('a' - 'A') : c; }
+INLINE u8   u8to_ascii (u8 c) { return c & 127; }
 
 // s8 ----------------------------------------------------------------------------------------------
 typedef struct {
@@ -131,9 +68,7 @@ typedef struct {
 
 INLINE i32
 s8cmp(const s8 s1 PTR, const s8 s2 PTR) {
-        if (s1->len != s2->len) {
-                return s1->len < s2->len ? -1 : 1;
-        }
+        if (s1->len != s2->len) { return s1->len < s2->len ? -1 : 1; }
         return memcmp(s1->data, s2->data, (size_t)s1->len);
 }
 
@@ -155,16 +90,14 @@ s8ends_with(const s8 s PTR, const s8 suffix PTR) {
 
 INLINE isize
 s8find(const s8 s PTR, const s8 sub PTR) {
-        if (sub->len == 0 || s->len < sub->len) return -1;
-        isize last_occ[256];
-        memset(last_occ, -1, 8 * 256);
-        for (isize i = 0; i < sub->len - 1; ++i) {
-                last_occ[sub->data[i]] = i;
-        }        
+        if (sub->len == 0 || s->len < sub->len) { return -1; }
+        isize last_occ[U8ALPHABET];
+        memset(last_occ, -1, U8SIZE * U8ALPHABET);
+        for (isize i = 0; i < sub->len - 1; ++i) { last_occ[sub->data[i]] = i; }
 
         for (isize i = 0; i <= s->len - sub->len;) {
                 for (isize j = sub->len - 1; sub->data[j] == s->data[j + i];) {
-                        if (--j == -1) return i;
+                        if (--j == -1) { return i; }
                 }
                 i += sub->len - 1 - last_occ[s->data[i + sub->len - 1]];
         }
@@ -173,20 +106,15 @@ s8find(const s8 s PTR, const s8 sub PTR) {
 
 INLINE isize
 s8count(const s8 s PTR, const s8 sub PTR) {
-        if (sub->len == 0 || s->len < sub->len) return 0;
+        if (sub->len == 0 || s->len < sub->len) { return 0; }
         isize count = 0;
-        isize last_occ[256];
-        memset(last_occ, -1, 8 * 256);
-        for (isize i = 0; i < sub->len - 1; ++i) {
-                last_occ[sub->data[i]] = i;
-        }        
+        isize last_occ[U8ALPHABET];
+        memset(last_occ, -1, U8SIZE * U8ALPHABET);
+        for (isize i = 0; i < sub->len - 1; ++i) { last_occ[sub->data[i]] = i; }
 
         for (isize i = 0; i <= s->len - sub->len;) {
                 for (isize j = sub->len - 1; sub->data[j] == s->data[j + i];) {
-                        if (--j == -1) {
-                                ++count;
-                                break;
-                        }
+                        if (--j == -1) { ++count; break; }
                 }
                 i += sub->len - 1 - last_occ[s->data[i + sub->len - 1]];
         }
