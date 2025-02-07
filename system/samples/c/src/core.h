@@ -1,3 +1,6 @@
+#ifndef CORE_H_
+#define CORE_H_
+
 #include <float.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -33,6 +36,16 @@ typedef char      byte;
 #define in_range(min, value, max) ((min) <= (value) && (value) <= (max))
 #define PTR [static 1]
 #define INLINE static inline
+
+#define TODO(...)                       (CORE_TODO_1 (__VA_ARGS__, 0))
+#define CORE_TODO_1(arg, ...) (void)arg, CORE_TODO_2 (__VA_ARGS__, 0)
+#define CORE_TODO_2(arg, ...) (void)arg, CORE_TODO_3 (__VA_ARGS__, 0)
+#define CORE_TODO_3(arg, ...) (void)arg, CORE_TODO_4 (__VA_ARGS__, 0)
+#define CORE_TODO_4(arg, ...) (void)arg, CORE_TODO_5 (__VA_ARGS__, 0)
+#define CORE_TODO_5(arg, ...) (void)arg, CORE_TODO_6 (__VA_ARGS__, 0)
+#define CORE_TODO_6(arg, ...) (void)arg, CORE_TODO_7 (__VA_ARGS__, 0)
+#define CORE_TODO_7(arg, ...) (void)arg, CORE_TODO_8 (__VA_ARGS__, 0)
+#define CORE_TODO_8(arg, ...) (void)arg
 
 // Arena -------------------------------------------------------------------------------------------
 
@@ -120,3 +133,5 @@ s8count(const s8 s PTR, const s8 sub PTR) {
         }
         return count;
 }
+
+#endif // CORE_H_

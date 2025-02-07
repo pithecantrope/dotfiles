@@ -2,8 +2,6 @@
 
 int
 main(int argc, char* argv[]) {
-        (void)argc;
-        (void)argv;
-
+        TODO(argc, argv);
         return EXIT_SUCCESS;
 }
