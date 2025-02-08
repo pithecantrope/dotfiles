@@ -10,19 +10,29 @@
  * @details
  * Types:
  * - Basic: `byte`, `i8`, `u8`, `i16`, `u16`, `i32`, `u32`, `i64`, `u64`, `f32`, `f64`, `isize`, `usize`
- * - Rich: `arena` (?), `s8` (string) 
+ * - Rich: `arena` (region-based allocator), `s8` (string) 
  * Macros:
- * - `assert(c)`: Debugger-oriented assertion
- * - `lable(name)`: Assembly label for debugging
- * - `countof(xs)`: Computes size of a static array
- * - `container_of(ptr, type, member)`: Computes the address of the structure containing a given member pointer
- * - `in_range(min, value, max)`: Checks if value is within a range
- * - `PTR`: Non-Null pointer `[static 1]`
+ * - `assert(c)`: Debugger-oriented assertion that in release builds turns into an optimization hint
+ * - `lable(name)`: Inline assembly label for debugging
+ * - `countof(xs)`: Computes the size of a static array
+ * - `container_of(ptr, type, member)`: Computes the address of the type containing a given member pointer
+ * - `in_range(min, value, max)`: Checks if the value is within a range
+ * - `PTR`: Non-NULL pointer `[static 1]`
  * - `INLINE`: `static inline`
  * - `TODO(args...)`: Marks incomplete code
  * Sanitizer flags:
  * - Address: `abort_on_error=true`,`check_initialization_order=true`, `strict_init_order=true`, `detect_stack_use_after_return=true`, `strict_string_checks=true`
  * - Undefined Behaviour: `abort_on_error=true`
+ * Functions `u8` (ctype.h-style):
+ * - is_digit, is_upper, is_lower, is_alpha, is_alnum, is_xdigit
+ * - is_print, is_graph, is_blank, is_space, is_ascii, is_cntrl, is_punct
+ * - to_upper, to_lower, to_ascii
+ * Functions `arena`:
+ * -
+ * Functions `s8`:
+ * - cmp(s1, s2), eq(s1, s2)
+ * - starts_with(s, prefix), ends_with(s, suffix)
+ * - find(s, sub), count(s, sub) 
  */
 
 #ifndef CORE_H_
@@ -46,9 +56,9 @@ typedef int64_t   i64;
 typedef uint64_t  u64;
 typedef float     f32;
 #define F32_MIN   FLT_MIN
-#define F32_MIN   FLT_MIN
+#define F32_MAX   FLT_MAX
 typedef double    f64;
-#define F64_MAX   DBL_MAX
+#define F64_MIN   DBL_MIN
 #define F64_MAX   DBL_MAX
 typedef ptrdiff_t isize;
 #define ISIZE_MIN PTRDIFF_MIN
@@ -135,6 +145,7 @@ s8ends_with(const s8 s PTR, const s8 suffix PTR) {
                memcmp(s->data + (s->len - suffix->len), suffix->data, (size_t)suffix->len) == 0;
 }
 
+// Horspool algorithm
 INLINE isize
 s8find(const s8 s PTR, const s8 sub PTR) {
         if (sub->len == 0 || s->len < sub->len) { return -1; }
