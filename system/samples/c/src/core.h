@@ -1,3 +1,30 @@
+/**
+ * @file core.h
+ * @brief Core utilities
+ * @copyright Copyright (C) 2025 Egor Afanasin <afanasin.egor@gmail.com>
+ * @license MIT
+ * @requirements
+ * - Compiler: GCC or Clang
+ * - Platform: POSIX-like systems (Linux, macOS)
+ * - C Standard: >= C99
+ * @details
+ * Types:
+ * - Basic: `byte`, `i8`, `u8`, `i16`, `u16`, `i32`, `u32`, `i64`, `u64`, `f32`, `f64`, `isize`, `usize`
+ * - Rich: `arena` (?), `s8` (string) 
+ * Macros:
+ * - `assert(c)`: Debugger-oriented assertion
+ * - `lable(name)`: Assembly label for debugging
+ * - `countof(xs)`: Computes size of a static array
+ * - `container_of(ptr, type, member)`: Computes the address of the structure containing a given member pointer
+ * - `in_range(min, value, max)`: Checks if value is within a range
+ * - `PTR`: Non-Null pointer `[static 1]`
+ * - `INLINE`: `static inline`
+ * - `TODO(args...)`: Marks incomplete code
+ * Sanitizer flags:
+ * - Address: `abort_on_error=true`,`check_initialization_order=true`, `strict_init_order=true`, `detect_stack_use_after_return=true`, `strict_string_checks=true`
+ * - Undefined Behaviour: `abort_on_error=true`
+ */
+
 #ifndef CORE_H_
 #define CORE_H_
 
@@ -8,6 +35,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef char      byte;
 typedef int8_t    i8;
 typedef uint8_t   u8;
 typedef int16_t   i16;
@@ -16,18 +44,17 @@ typedef int32_t   i32;
 typedef uint32_t  u32;
 typedef int64_t   i64;
 typedef uint64_t  u64;
-typedef ptrdiff_t isize;
-#define ISIZE_MIN PTRDIFF_MIN
-#define ISIZE_MAX PTRDIFF_MAX
-typedef size_t    usize;
-#define USIZE_MAX SIZE_MAX
 typedef float     f32;
 #define F32_MIN   FLT_MIN
 #define F32_MIN   FLT_MIN
 typedef double    f64;
 #define F64_MAX   DBL_MAX
 #define F64_MAX   DBL_MAX
-typedef char      byte;
+typedef ptrdiff_t isize;
+#define ISIZE_MIN PTRDIFF_MIN
+#define ISIZE_MAX PTRDIFF_MAX
+typedef size_t    usize;
+#define USIZE_MAX SIZE_MAX
 
 #define assert(c)   while (!(c)) __builtin_unreachable()
 #define label(name) __asm__ volatile (#name ":\n\tnop")
@@ -47,7 +74,14 @@ typedef char      byte;
 #define CORE_TODO_7(arg, ...) (void)arg, CORE_TODO_8 (__VA_ARGS__, 0)
 #define CORE_TODO_8(arg, ...) (void)arg
 
-// Arena -------------------------------------------------------------------------------------------
+#if __has_feature(address_sanitizer) || defined(__SANITIZE_ADDRESS__)
+const char* __asan_default_options (void) { return "abort_on_error=true:check_initialization_order=true:strict_init_order=true:detect_stack_use_after_return=true:strict_string_checks=true"; }
+#endif
+#if __has_feature(undefined_behavior_sanitizer) || defined(__SANITIZE_UNDEFINED__)
+const char* __ubsan_default_options(void) { return "abort_on_error=true"; }
+#endif
+
+// arena -------------------------------------------------------------------------------------------
 
 // u8 ----------------------------------------------------------------------------------------------
 #define U8SIZE 8
