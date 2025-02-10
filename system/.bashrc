@@ -38,7 +38,10 @@ function c() {
 
 function new() {
     [[ ! -e "${HOME}/projects/dotfiles/system/samples/${1}" ]] && echo "No sample for '${1}'" && return
-    cp   -r "${HOME}/projects/dotfiles/system/samples/${1}" . ;  mv "${1}" "${2}" ; cd "${2}" ; $EDITOR .
+    cp   -r "${HOME}/projects/dotfiles/system/samples/${1}" . &&  mv "${1}" "${2}" && cd "${2}"
+    git init && gh repo create "${2}" --source=. --remote=origin --public
+    git add . && git commit -m "Init" && git push --set-upstream origin main
+    $EDITOR .
 }
 
 function yt() {
