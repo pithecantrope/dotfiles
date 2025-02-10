@@ -9,7 +9,7 @@ CC := gcc
 CPPFLAGS := -MMD -MP
 
 TARGET_DIR := $(BUILD_DIR)/$(CONFIG)
-TARGET := $(PROJECT_NAME)-$(CONFIG)
+TARGET := $(TARGET_DIR)/$(PROJECT_NAME)-$(CONFIG)
 
 CFLAGS_RELEASE := -O3 -flto=auto
 CFLAGS_DEBUG := -O0 -ggdb3
@@ -24,14 +24,14 @@ OBJS := $(SRCS:$(SRC_DIR)/%.c=$(TARGET_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
 .SILENT:
-.PHONY: all release _release debug _debug perf _perf cache _cache call _call mem _mem run clean compiledb
+.PHONY: all release _release debug _debug perf _perf leak _leak cache _cache call _call mem _mem run clean compiledb
 
-all: $(TARGET_DIR)/$(TARGET)
+all: $(TARGET)
 
 $(TARGET_DIR):
 	mkdir -p $@
 
-$(TARGET_DIR)/$(TARGET): $(OBJS)
+$(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 $(TARGET_DIR)/%.o: $(SRC_DIR)/%.c | $(TARGET_DIR)
@@ -42,30 +42,38 @@ release:
 	$(MAKE) -s CONFIG=RELEASE _release
 
 _release:
-	$(TARGET_DIR)/$(TARGET) $(ARGS)
+	$(TARGET) $(ARGS)
 
 debug:
 	$(MAKE) -s CONFIG=DEBUG
 	$(MAKE) -s CONFIG=DEBUG _debug
 
 _debug:
-	gdb -q -ex 'break main' --tui --args $(TARGET_DIR)/$(TARGET) $(ARGS)
+	gdb -q -ex 'break main' --tui --args $(TARGET) $(ARGS)
 
 perf:
 	$(MAKE) -s CONFIG=PROFILE
 	$(MAKE) -s CONFIG=PROFILE _perf
 
 _perf:
-	perf record -g --freq=max -o $(TARGET_DIR)/perf.data $(TARGET_DIR)/$(TARGET) $(ARGS)
+	perf record -g --freq=max -o $(TARGET_DIR)/perf.data $(TARGET) $(ARGS)
 	perf script -i $(TARGET_DIR)/perf.data | stackcollapse-perf.pl | flamegraph.pl > $(TARGET_DIR)/flamegraph.svg
 	$(BROWSER) $(TARGET_DIR)/flamegraph.svg
+
+leak:
+	$(MAKE) -s CONFIG=DEBUG
+	$(MAKE) -s CONFIG=DEBUG _leak
+
+_leak:
+	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=$(TARGET_DIR)/leak.txt $(TARGET) $(ARGS)
+	$(EDITOR) $(TARGET_DIR)/leak.txt
 
 cache:
 	$(MAKE) -s CONFIG=PROFILE
 	$(MAKE) -s CONFIG=PROFILE _cache
 
 _cache:
-	valgrind -q --tool=cachegrind --cachegrind-out-file=$(TARGET_DIR)/cache.out $(TARGET_DIR)/$(TARGET) $(ARGS)
+	valgrind -q --tool=cachegrind --cachegrind-out-file=$(TARGET_DIR)/cache.out $(TARGET) $(ARGS)
 	cg_annotate $(TARGET_DIR)/cache.out > $(TARGET_DIR)/cache.txt
 	$(EDITOR) $(TARGET_DIR)/cache.txt
 
@@ -74,7 +82,7 @@ call:
 	$(MAKE) -s CONFIG=PROFILE _call
 
 _call:
-	valgrind -q --tool=callgrind --callgrind-out-file=$(TARGET_DIR)/call.out $(TARGET_DIR)/$(TARGET) $(ARGS)
+	valgrind -q --tool=callgrind --callgrind-out-file=$(TARGET_DIR)/call.out $(TARGET) $(ARGS)
 	callgrind_annotate $(TARGET_DIR)/call.out > $(TARGET_DIR)/call.txt
 	$(EDITOR) $(TARGET_DIR)/call.txt
 
@@ -83,11 +91,11 @@ mem:
 	$(MAKE) -s CONFIG=PROFILE _mem
 
 _mem:
-	valgrind -q --tool=massif --massif-out-file=$(TARGET_DIR)/mem.out $(TARGET_DIR)/$(TARGET) $(ARGS)
+	valgrind -q --tool=massif --massif-out-file=$(TARGET_DIR)/mem.out $(TARGET) $(ARGS)
 	ms_print $(TARGET_DIR)/mem.out > $(TARGET_DIR)/mem.txt
 	$(EDITOR) $(TARGET_DIR)/mem.txt
 
-run: $(TARGET_DIR)/$(TARGET)
+run: $(TARGET)
 	$^ $(ARGS)
 
 clean:
