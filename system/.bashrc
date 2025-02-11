@@ -28,6 +28,10 @@ function cd() {
     builtin cd "$@" && ls -a
 }
 
+function man() {
+    command man "$@" || "$@" --help | less
+}
+
 function mc() {
     mkdir -p "${1}" && cd "${1}"
 }
