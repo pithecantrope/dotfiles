@@ -16,7 +16,7 @@ CFLAGS_DEBUG := -O0 -ggdb3
 CFLAGS_PROFILE := -O2 -fno-inline -fno-omit-frame-pointer -g3
 CFLAGS_DEV := -std=c17 -O0 -g3 -fsanitize=address,undefined -Werror -Wall -Wextra \
 			  -pedantic-errors -Wlogical-op -Wconversion -Winline -Wundef -Wshadow \
-			  -Wswitch-default -Wdouble-promotion -Wfloat-equal -Wswitch-enum
+			  -Wswitch-default -Wdouble-promotion -Wfloat-equal -Wswitch-enum -fanalyzer
 CFLAGS := $(CFLAGS_$(CONFIG))
 
 SRCS := $(wildcard $(SRC_DIR)/*.c)
