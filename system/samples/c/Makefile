@@ -1,3 +1,4 @@
+MAKEFLAGS += -j$(nproc)
 PROJECT_NAME := bin
 LDFLAGS :=
 ARGS ?=
@@ -11,12 +12,12 @@ CPPFLAGS := -MMD -MP
 TARGET_DIR := $(BUILD_DIR)/$(CONFIG)
 TARGET := $(TARGET_DIR)/$(PROJECT_NAME)-$(CONFIG)
 
-CFLAGS_RELEASE := -O3 -flto=auto
+CFLAGS_RELEASE := -O3 -flto=auto -DNDEBUG
 CFLAGS_DEBUG := -O0 -ggdb3
 CFLAGS_PROFILE := -O2 -fno-inline -fno-omit-frame-pointer -g3
-CFLAGS_DEV := -std=c17 -O0 -g3 -fsanitize=address,undefined -Werror -Wall -Wextra \
-			  -pedantic-errors -Wlogical-op -Wconversion -Winline -Wundef -Wshadow \
-			  -Wswitch-default -Wdouble-promotion -Wfloat-equal -Wswitch-enum -fanalyzer
+CFLAGS_DEV := -std=c17 -O0 -g3 -fsanitize=address,undefined -Werror -Wall -Wextra -pedantic-errors \
+			  -fanalyzer -Wlogical-op -Wconversion -Winline -Wundef -Wswitch-default -Wswitch-enum \
+			  -Wshadow -Wdouble-promotion -Wfloat-equal -Wstrict-prototypes -Wold-style-definition
 CFLAGS := $(CFLAGS_$(CONFIG))
 
 SRCS := $(wildcard $(SRC_DIR)/*.c)
@@ -24,7 +25,7 @@ OBJS := $(SRCS:$(SRC_DIR)/%.c=$(TARGET_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
 .SILENT:
-.PHONY: all release _release debug _debug perf _perf leak _leak cache _cache call _call mem _mem run clean compiledb
+.PHONY: all release _release debug _debug perf _perf leak _leak cache _cache call _call mem _mem run spell clean compiledb
 
 all: $(TARGET)
 
@@ -97,6 +98,9 @@ _mem:
 
 run: $(TARGET)
 	$^ $(ARGS)
+
+spell:
+	codespell $(SRC_DIR) README.md
 
 clean:
 	rm -rf $(BUILD_DIR)
