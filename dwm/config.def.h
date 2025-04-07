@@ -61,9 +61,9 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *brightness_dec[] = { "brightnessctl", "set", "10%-", NULL };
 static const char *brightness_inc[] = { "brightnessctl", "set", "10%+", NULL };
-static const char *volume_dec[] = { "wpctl", "set-volume",  "@DEFAULT_SINK@", "10%-", NULL };
-static const char *volume_inc[] = { "wpctl", "set-volume",  "@DEFAULT_SINK@", "10%+", NULL };
-static const char *screenshot_full[]   = { "scrot", "-u",  NULL };
+static const char *volume_dec[] = { "wpctl", "set-volume", "@DEFAULT_SINK@", "10%-", NULL };
+static const char *volume_inc[] = { "wpctl", "set-volume", "@DEFAULT_SINK@", "10%+", NULL };
+static const char *screenshot_full[]   = { "scrot", "-u", NULL };
 static const char *screenshot_region[] = { "scrot", "-s", NULL };
 static const char *lock_screen[]  = { "slock", NULL };
 
@@ -75,9 +75,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Right,  spawn,          {.v = brightness_inc} },
 	{ MODKEY,                       XK_Down,   spawn,          {.v = volume_dec} },
 	{ MODKEY,                       XK_Up,     spawn,          {.v = volume_inc} },
-	{ MODKEY,                       XK_Print,  spawn,          {.v = screenshot_full} },
-	{ MODKEY|ShiftMask,             XK_Print,  spawn,          {.v = screenshot_region} },
-	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = lock_screen} },
+	{ MODKEY,                       XK_s,      spawn,          {.v = screenshot_full} },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshot_region} },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lock_screen} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

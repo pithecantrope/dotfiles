@@ -9,9 +9,6 @@ PS1='\[\e[3;33m\]\w \[\e[0;32m\]>\[\e[0m\] '
 
 alias hx=helix
 alias shx='sudo -E helix'
-alias p='sudo pacman'
-alias P='sudo poweroff'
-alias R='sudo reboot'
 alias ls='eza --git-ignore --group-directories-first --color --icons'
 
 alias ga='git add'
