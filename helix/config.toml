@@ -11,7 +11,6 @@ jump-label-alphabet = "jfkdls;aurieowpqnvmcxz"
 "C-[" = ["keep_primary_selection", "collapse_selection"]
 "C-c" = ["save_selection", "extend_to_line_bounds", "yank_to_primary_clipboard",
          "paste_primary_clipboard_before", "jump_backward"]
-"X"   = "extend_line_above"
 
 [keys.insert]
 "C-[" = "normal_mode"
