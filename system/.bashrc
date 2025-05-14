@@ -10,6 +10,9 @@ PS1='\[\e[3;33m\]\w \[\e[0;32m\]>\[\e[0m\] '
 alias hx=helix
 alias shx='sudo -E helix'
 alias ls='eza --git-ignore --group-directories-first --color --icons'
+alias la='ls -A'
+alias pu='pastebinit -b "https://paste.ubuntu.com" | qr'
+alias pd='curl https://pastebin.com/raw/U1k0ant3'
 
 alias ga='git add'
 alias gc='git commit'
@@ -22,7 +25,7 @@ alias gR='git reset HEAD~1'
 alias gs='git status'
 
 function cd() {
-    builtin cd "$@" && ls -a
+    builtin cd "$@" && la
 }
 
 function man() {
@@ -43,8 +46,4 @@ function new() {
     git init && gh repo create "${2}" --source=. --remote=origin --public
     git add . && git commit -m "Init" && git push --set-upstream origin main
     $EDITOR .
-}
-
-function yt() {
-    chromium --proxy-server="socks://0.0.0.0:1080"
 }

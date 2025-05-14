@@ -14,7 +14,6 @@ done &
 
 setxkbmap -layout us,ru -option grp:alt_caps_toggle &
 unclutter --timeout 1 --start-hidden &
-ciadpi --disorder 1 &
 
 st &
 chromium &
