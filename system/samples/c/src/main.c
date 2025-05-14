@@ -1,7 +1,9 @@
-#include "core.h"
+#include "just.h"
 
 int
 main(int argc, char* argv[]) {
-        TODO(argc, argv);
+        (void)argc;
+        (void)argv;
+
         return EXIT_SUCCESS;
 }
