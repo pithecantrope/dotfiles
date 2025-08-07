@@ -10,9 +10,11 @@
 
 [delta]
     navigate = true
-    dark = true
+	dark = true
+	theme = gruvbox-dark
 
 [merge]
     conflictstyle = zdiff3
+
 [init]
 	defaultBranch = main
