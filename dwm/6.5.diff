@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index 9efa774..248527d 100644
+index 9efa774..bbc576f 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -1,34 +1,34 @@
@@ -71,12 +71,12 @@ index 9efa774..248527d 100644
 +static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", black, "-nf", white, "-sb", black, "-sf", blue, NULL };
  static const char *termcmd[]  = { "st", NULL };
  
-+static const char *brightness_dec[] = { "brightnessctl", "set", "10%-", NULL };
-+static const char *brightness_inc[] = { "brightnessctl", "set", "10%+", NULL };
++static const char *brightness_dec[] = { "brightnessctl", "-q", "set", "10%-", NULL };
++static const char *brightness_inc[] = { "brightnessctl", "-q", "set", "10%+", NULL };
 +static const char *volume_dec[] = { "wpctl", "set-volume", "@DEFAULT_SINK@", "10%-", NULL };
 +static const char *volume_inc[] = { "wpctl", "set-volume", "@DEFAULT_SINK@", "10%+", NULL };
-+static const char *screenshot_active[] = { "/bin/sh", "-c", "maim -u ~/Downloads/$(date +%s).png", NULL };
-+static const char *screenshot_region[] = { "/bin/sh", "-c", "maim -u -s ~/Downloads/$(date +%s).png", NULL };
++static const char *screenshot_active[] = { "sh", "-c", "maim -u ~/Downloads/$(date +%s).png", NULL };
++static const char *screenshot_region[] = { "sh", "-c", "maim -u -s ~/Downloads/$(date +%s).png", NULL };
 +
  static const Key keys[] = {
  	/* modifier                     key        function        argument */
