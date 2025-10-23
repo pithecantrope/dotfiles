@@ -27,3 +27,5 @@ function new() {
     cp   -r "${HOME}/projects/dotfiles/samples/${1}" .  &&  mv "${1}" "${2}" && cd "${2}"
     ${EDITOR} .
 }
+
+. "$HOME/.local/bin/env"

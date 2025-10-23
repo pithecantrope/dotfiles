@@ -2,6 +2,7 @@ theme = "sunset"
 
 [editor]
 gutters = ["diagnostics", "spacer", "diff"]
+true-color = true
 bufferline = "always"
 auto-format = false
 popup-border = "all"

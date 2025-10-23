@@ -1,5 +1,6 @@
 #!/bin/sh
 
+xset s off -dpms
 xprop -root -set WM_NAME "Afanasin Egor"
 setxkbmap -layout us,ru -option grp:alt_caps_toggle &
 
