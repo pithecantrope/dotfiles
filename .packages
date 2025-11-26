@@ -1,51 +1,71 @@
 # A:
 
 # B:
-bat                 # Better `cat`
+bat                    # Better `cat`
+brightnessctl          # Brightness control
+btop                   # 
 
 # C:
 
 # D:
+dmenu                  #
+dwm                    #
 
 # E:
-eza                 #
+eza                    #
 
 # F:
-fd                  #
-fzf                 #
+fastfetch              # System information
+fd                     #
+firefox                #
+firefox-tridactyl      #
+fzf                    # Fuzzy finder
 
 # G:
-git                 # Version control
-git-delta           # `git` pager
-gnome-themes-extra  # Dark mode
+git                    # Version control
+git-delta              # `git` pager
+gnome-themes-extra     # Dark mode
 
 # H:
+helix                  # 
 
 # I:
 
 # J:
 
 # K:
+krita                  #
 
 # L:
+libreoffice-still-ru   # Office suite
+ly                     # Display manager
 
 # M:
+maim                   # Screenshot maker
+mpv                    # Media player
 
 # N:
 
 # O:
-openssh             # Remote connection
+obs-studio             # 
+openssh                # Remote connection
+ouch                   # Compression decompression
 
 # P:
+python-qrcode          # QR code
 
 # Q:
 
 # R:
-ripgrep
+ripgrep                #
 
 # S:
+st                     #
 
 # T:
+telegram-desktop       # Messaging app
+tokei                  # Code counter
+ttf-cascadia-mono-nerd # Terminal font
 
 # U:
 
@@ -56,5 +76,6 @@ ripgrep
 # X:
 
 # Y:
+yt-dlp                 # Video downloader
 
 # Z:
