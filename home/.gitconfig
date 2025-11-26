@@ -2,6 +2,9 @@
 	email = fartdraft@gmail.com
 	name = pithecantrope
 
+[init]
+	defaultBranch = main
+
 [core]
     pager = delta
 
@@ -11,10 +14,11 @@
 [delta]
     navigate = true
 	dark = true
-	theme = gruvbox-dark
+	line-numbers = true
 
 [merge]
     conflictstyle = zdiff3
 
-[init]
-	defaultBranch = main
+[diff]
+    colorMoved = default
+

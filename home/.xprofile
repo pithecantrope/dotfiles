@@ -1,0 +1,9 @@
+#!/bin/sh
+
+xprop -root -set WM_NAME "Afanasin Egor"
+setxkbmap -layout us,ru -option grp:win_space_toggle &
+
+st &
+firefox &
+
+exec dwm
