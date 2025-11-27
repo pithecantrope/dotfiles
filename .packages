@@ -1,40 +1,40 @@
 # A:
 
 # B:
-bat                    # Better `cat`
+bat                    # Modern `cat`
 brightnessctl          # Brightness control
-btop                   # 
+btop                   # Resouces monitor 
 
 # C:
 
 # D:
-dmenu                  #
-dwm                    #
+dmenu                  # Dynamic menu
+dwm                    # Window manager
 
 # E:
-eza                    #
+eza                    # Modern `ls`
 
 # F:
 fastfetch              # System information
-fd                     #
-firefox                #
-firefox-tridactyl      #
+fd                     # Modern `find`
+firefox                # Web browser
+firefox-tridactyl      # Vim-like interface
 fzf                    # Fuzzy finder
 
 # G:
 git                    # Version control
 git-delta              # `git` pager
+glow                   # CLI markdown
 gnome-themes-extra     # Dark mode
 
 # H:
-helix                  # 
+helix                  # Text editor
 
 # I:
 
 # J:
 
 # K:
-krita                  #
 
 # L:
 libreoffice-still-ru   # Office suite
@@ -47,7 +47,7 @@ mpv                    # Media player
 # N:
 
 # O:
-obs-studio             # 
+obs-studio             # Live streaming
 openssh                # Remote connection
 ouch                   # Compression decompression
 
@@ -57,13 +57,12 @@ python-qrcode          # QR code
 # Q:
 
 # R:
-ripgrep                #
+ripgrep                # Modern `grep`
 
 # S:
 st                     #
 
 # T:
-telegram-desktop       # Messaging app
 tokei                  # Code counter
 ttf-cascadia-mono-nerd # Terminal font
 
@@ -74,6 +73,8 @@ ttf-cascadia-mono-nerd # Terminal font
 # W:
 
 # X:
+xclip                  # X11 Clipboard
+xorg                   # Window system
 
 # Y:
 yt-dlp                 # Video downloader
