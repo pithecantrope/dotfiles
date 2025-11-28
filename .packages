@@ -67,6 +67,7 @@ tokei                  # Code counter
 ttf-cascadia-mono-nerd # Terminal font
 
 # U:
+unclutter              # Cursor hider
 
 # V:
 vivid                  # `LS_COLORS` generator 

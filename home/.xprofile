@@ -1,7 +1,8 @@
 #!/bin/sh
 
 xprop -root -set WM_NAME "Afanasin Egor"
-setxkbmap -layout us,ru -option grp:win_space_toggle &
+setxkbmap -layout us,ru -option grp:alt_caps_toggle
+unclutter --start-hidden -b
 
 st &
 firefox &
