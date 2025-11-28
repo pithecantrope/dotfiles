@@ -60,7 +60,7 @@ python-qrcode          # QR code
 ripgrep                # Modern `grep`
 
 # S:
-st                     #
+st                     # Suckless terminal
 
 # T:
 tokei                  # Code counter
@@ -69,6 +69,7 @@ ttf-cascadia-mono-nerd # Terminal font
 # U:
 
 # V:
+vivid                  # `LS_COLORS` generator 
 
 # W:
 
