@@ -14,7 +14,7 @@
 [delta]
     navigate = true
 	dark = true
-	line-numbers = true
+	syntax-theme = gruvbox-dark
 
 [merge]
     conflictstyle = zdiff3
