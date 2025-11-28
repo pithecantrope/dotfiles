@@ -1,84 +1,61 @@
-# A:
-
-# B:
+# To install packages, run:
+# sed 's/ *#.*//; /^$/d' .packages | sudo pacman -S --needed -
+   # A)
+   # B)
 bat                    # Modern `cat`
 brightnessctl          # Brightness control
 btop                   # Resouces monitor 
-
-# C:
-
-# D:
+   # C)
+   # D)
 dmenu                  # Dynamic menu
-dwm                    # Window manager
-
-# E:
+#dwm                   # Window manager `git clone https://git.suckless.org/dwm`
+   # E)
 eza                    # Modern `ls`
-
-# F:
+   # F)
 fastfetch              # System information
 fd                     # Modern `find`
 firefox                # Web browser
 firefox-tridactyl      # Vim-like interface
 fzf                    # Fuzzy finder
-
-# G:
+   # G)
 git                    # Version control
 git-delta              # `git` pager
 glow                   # CLI markdown
 gnome-themes-extra     # Dark mode
-
-# H:
+   # H)
 helix                  # Text editor
-
-# I:
-
-# J:
-
-# K:
-
-# L:
+   # I)
+   # J)
+   # K)
+   # L)
 libreoffice-still-ru   # Office suite
 ly                     # Display manager
-
-# M:
+   # M)
 maim                   # Screenshot maker
 mpv                    # Media player
-
-# N:
-
-# O:
+   # N)
+   # O)
 obs-studio             # Live streaming
 openssh                # Remote connection
 ouch                   # Compression decompression
-
-# P:
+   # P)
 python-qrcode          # QR code
-
-# Q:
-
-# R:
+   # Q)
+   # R)
 ripgrep                # Modern `grep`
-
-# S:
-st                     # Suckless terminal
-
-# T:
+   # S)
+#st                    # Suckless terminal `git clone https://git.suckless.org/st`
+   # T)
 tokei                  # Code counter
 ttf-cascadia-mono-nerd # Terminal font
-
-# U:
+   # U)
 unclutter              # Cursor hider
-
-# V:
+   # V)
 vivid                  # `LS_COLORS` generator 
-
-# W:
-
-# X:
+   # W)
+   # X)
 xclip                  # X11 Clipboard
 xorg                   # Window system
-
-# Y:
+   # Y)
 yt-dlp                 # Video downloader
-
-# Z:
+   # Z)
