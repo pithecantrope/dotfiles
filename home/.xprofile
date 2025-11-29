@@ -1,6 +1,13 @@
 #!/bin/sh
 
-xprop -root -set WM_NAME "Afanasin Egor"
+{
+    while true; do
+        time=$(date '+%H:%M')
+        battery=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null || echo '?')
+        xsetroot -name "BAT: ${battery}% | ${time}"
+        sleep 33s
+    done
+} &
 setxkbmap -layout us,ru -option grp:alt_caps_toggle
 unclutter --start-hidden -b
 

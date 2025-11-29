@@ -46,6 +46,7 @@ ripgrep                # Modern `grep`
    # S)
 #st                    # Suckless terminal `git clone https://git.suckless.org/st`
    # T)
+tlp                    # Battery life
 tokei                  # Code counter
 ttf-cascadia-mono-nerd # Terminal font
    # U)
