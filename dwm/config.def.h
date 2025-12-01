@@ -28,6 +28,7 @@ static const Rule rules[] = {
 	 */
 	/* class            instance    title       tags mask     isfloating   monitor */
 	{ "libreoffice",    NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "pinta"      ,    NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "firefox",        NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "obs",            NULL,       NULL,       1 << 3,       0,           -1 },
 };
@@ -62,8 +63,10 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
-static const char *brightness_dec[] = { "brightnessctl", "-q", "set", "10%-", NULL };
-static const char *brightness_inc[] = { "brightnessctl", "-q", "set", "10%+", NULL };
+static const char *screen_dec[] = { "brightnessctl", "-q", "set", "10%-", NULL };
+static const char *screen_inc[] = { "brightnessctl", "-q", "set", "10%+", NULL };
+static const char *keyboard_dec[] = { "brightnessctl", "-d", "*::kbd_backlight", "set", "1-", NULL };
+static const char *keyboard_inc[] = { "brightnessctl", "-d", "*::kbd_backlight", "set", "1+", NULL };
 static const char *volume_dec[] = { "wpctl", "set-volume", "@DEFAULT_SINK@", "10%-", NULL };
 static const char *volume_inc[] = { "wpctl", "set-volume", "@DEFAULT_SINK@", "10%+", NULL };
 static const char *volume_mute[] = { "wpctl", "set-mute", "@DEFAULT_SINK@", "toggle", NULL };
@@ -74,8 +77,10 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_a,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_Left,   spawn,          {.v = brightness_dec} },
-	{ MODKEY,                       XK_Right,  spawn,          {.v = brightness_inc} },
+	{ MODKEY,                       XK_Left,   spawn,          {.v = screen_dec} },
+	{ MODKEY,                       XK_Right,  spawn,          {.v = screen_inc} },
+	{ MODKEY|ShiftMask,             XK_Left,   spawn,          {.v = keyboard_dec} },
+	{ MODKEY|ShiftMask,             XK_Right,  spawn,          {.v = keyboard_inc} },
 	{ MODKEY,                       XK_Down,   spawn,          {.v = volume_dec} },
 	{ MODKEY,                       XK_Up,     spawn,          {.v = volume_inc} },
 	{ MODKEY,                       XK_v,      spawn,          {.v = volume_mute} },
