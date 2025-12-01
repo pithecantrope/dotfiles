@@ -8,7 +8,6 @@
         sleep 33s
     done
 } &
-setxkbmap -layout us,ru -option grp:alt_caps_toggle
 unclutter --start-hidden -b
 
 st &

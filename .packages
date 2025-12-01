@@ -1,15 +1,18 @@
 # To install packages, run:
 # sed 's/ *#.*//; /^$/d' .packages | sudo pacman -S --needed -
+# Software with a leading '#' must be installed manually.
    # A)
    # B)
 bat                    # Modern `cat`
 brightnessctl          # Brightness control
-btop                   # Resouces monitor 
+btop                   # Resources monitor
    # C)
+#chatterino2-bin       # Chat client 'yay -S chatterino2-bin'
    # D)
 dmenu                  # Dynamic menu
 #dwm                   # Window manager `git clone https://git.suckless.org/dwm`
    # E)
+easyeffects            # Audio enhancer
 eza                    # Modern `ls`
    # F)
 fastfetch              # System information
@@ -27,6 +30,7 @@ helix                  # Text editor
    # I)
    # J)
    # K)
+keyd                   # Key remapper
    # L)
 libreoffice-still-ru   # Office suite
 ly                     # Display manager
@@ -39,9 +43,12 @@ obs-studio             # Live streaming
 openssh                # Remote connection
 ouch                   # Compression decompression
    # P)
+pacman-contrib         # Cache cleaner
+#pinta                 # Paint program 'yay -S pinta'
 python-qrcode          # QR code
    # Q)
    # R)
+reflector              # Mirror manager
 ripgrep                # Modern `grep`
    # S)
 #st                    # Suckless terminal `git clone https://git.suckless.org/st`
@@ -52,11 +59,13 @@ ttf-cascadia-mono-nerd # Terminal font
    # U)
 unclutter              # Cursor hider
    # V)
-vivid                  # `LS_COLORS` generator 
+vivid                  # `LS_COLORS` generator
    # W)
+wireless-regdb         # Regulatory database
    # X)
 xclip                  # X11 Clipboard
 xorg                   # Window system
    # Y)
+#yay                   # AUR helper `sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si`
 yt-dlp                 # Video downloader
    # Z)
