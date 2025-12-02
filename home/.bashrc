@@ -27,3 +27,6 @@ alias pb='curl -F "file=@-" 0x0.st'
 
 alias fp='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
 eval "$(fzf --bash)" # Ctrl-T, Ctrl-R, Alt-C and helix **<TAB>
+
+alias pomowork='sleep 1m && notify-send -u low "Pomodoro" "You have earned a rest"'
+alias pomobreak='sleep 1m && notify-send -u normal "Pomodoro" "Get back to work"'

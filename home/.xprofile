@@ -4,7 +4,11 @@
     while true; do
         time=$(date '+%H:%M')
         battery=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null || echo '?')
-        xsetroot -name "BAT: ${battery}% | ${time}"
+        if [ "$battery" -lt 25 ] 2>/dev/null; then
+            notify-send -u critical 'Low Battery'
+        fi
+        todo=$(rg -F '[ ]' ~/projects/TODO -m1 | sed 's/^\[ \] //' || echo 'None')
+        xsetroot -name "TODO: '${todo}' | BAT: ${battery}% | ${time}"
         sleep 33s
     done
 } &
