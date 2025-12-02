@@ -10,6 +10,7 @@ btop                   # Resources monitor
 #chatterino2-bin       # Chat client 'yay -S chatterino2-bin'
    # D)
 dmenu                  # Dynamic menu
+dunst                  # Notification daemon
 #dwm                   # Window manager `git clone https://git.suckless.org/dwm`
    # E)
 easyeffects            # Audio enhancer

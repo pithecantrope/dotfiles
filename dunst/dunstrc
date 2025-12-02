@@ -1,0 +1,25 @@
+[global]
+	# Gruvbox-dark colorscheme
+    offset = (0, 20) # Just under 'WM_NAME'
+    frame_color = "#928374"
+    font = Adwaita Mono 11
+    enable_recursive_icon_lookup = false
+    icon_path = ~/projects/dotfiles/dunst/icons
+
+[urgency_low]
+    background = "#458588"
+    foreground = "#d5c4a1"
+    timeout = 10
+    default_icon = message
+
+[urgency_normal]
+    background = "#689d6a"
+    foreground = "#ebdbb2"
+    timeout = 30
+    default_icon = bell
+
+[urgency_critical]
+    background = "#b16286"
+    foreground = "#fbf1c7"
+    timeout = 0
+    default_icon = alert-triangle
